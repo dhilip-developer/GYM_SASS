@@ -26,7 +26,7 @@ router.get('/', authMiddleware, async (req, res) => {
 
 // POST /api/settings (UPSERT single settings row)
 router.post('/', authMiddleware, async (req, res) => {
-  const { gym_name, owner_name, phone, whatsapp_number, email, address, whatsapp_mode } = req.body;
+  const { gym_name, owner_name, phone, whatsapp_number, email, address, whatsapp_mode, whatsapp_schedule_time } = req.body;
 
   if (!gym_name || !owner_name || !phone) {
     return res.status(400).json({ error: 'Gym name, owner name, and phone number are required' });
@@ -53,6 +53,7 @@ router.post('/', authMiddleware, async (req, res) => {
           phone,
           whatsapp_number: whatsapp_number || null,
           whatsapp_mode: whatsapp_mode || 'redirect',
+          whatsapp_schedule_time: whatsapp_schedule_time || '08:00',
           email: email || null,
           address: address || null
         })
@@ -73,6 +74,7 @@ router.post('/', authMiddleware, async (req, res) => {
           phone,
           whatsapp_number: whatsapp_number || null,
           whatsapp_mode: whatsapp_mode || 'redirect',
+          whatsapp_schedule_time: whatsapp_schedule_time || '08:00',
           email: email || null,
           address: address || null,
           gym_id: req.gymId

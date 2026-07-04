@@ -4,23 +4,45 @@ const { getTodayStr, addDays, formatMessage } = require('../utils/sms');
 
 // Initialize the cron scheduler
 const initScheduler = () => {
-  console.log('[SCHEDULER] Daily 8:00 AM WhatsApp notification cron job initialized.');
+  console.log('[SCHEDULER] Per-Gym automated WhatsApp notification cron job initialized.');
 
-  // Run daily at 8:00 AM: '0 8 * * *'
-  cron.schedule('0 8 * * *', async () => {
-    console.log('[SCHEDULER] Running daily WhatsApp checks...');
+  // Run every minute: '* * * * *'
+  cron.schedule('* * * * *', async () => {
     try {
       const todayStr = getTodayStr();
       
-      // 1. Fetch active message templates
+      // Get current time in HH:mm format (e.g. "08:00")
+      const now = new Date();
+      const currentHours = String(now.getHours()).padStart(2, '0');
+      const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+      const currentTimeStr = `${currentHours}:${currentMinutes}`;
+      
+      // 1. Fetch gyms that are scheduled for this exact minute
+      const { data: gymsToProcess, error: gymError } = await supabase
+        .from('gym_settings')
+        .select('*')
+        .eq('whatsapp_schedule_time', currentTimeStr);
+
+      if (gymError) throw gymError;
+      
+      if (!gymsToProcess || gymsToProcess.length === 0) {
+        // Most minutes will have no gyms scheduled
+        return;
+      }
+      
+      console.log(`[SCHEDULER] Found ${gymsToProcess.length} gym(s) scheduled for ${currentTimeStr}...`);
+
+      // 1. Fetch active message templates for these gyms
+      const gymIds = gymsToProcess.map(g => g.gym_id);
       const { data: templates, error: templatesError } = await supabase
         .from('message_templates')
         .select('*')
+        .in('gym_id', gymIds)
         .eq('is_active', true);
 
       if (templatesError) throw templatesError;
       if (!templates || templates.length === 0) {
-        console.log('[SCHEDULER] No active message templates found. Exiting job.');
+        console.log(`[SCHEDULER] No active message templates found for gyms at ${currentTimeStr}. Exiting job.`);
         return;
       }
 
@@ -33,15 +55,8 @@ const initScheduler = () => {
         const gymId = template.gym_id;
         let memberships = [];
 
-        // Fetch gym settings for this specific gym
-        const { data: settingsList, error: settingsError } = await supabase
-          .from('gym_settings')
-          .select('*')
-          .eq('gym_id', gymId);
-
-        if (settingsError) throw settingsError;
-
-        const settings = (settingsList && settingsList.length > 0) ? settingsList[0] : {
+        // The settings were already fetched in step 1, so we just find it
+        const settings = gymsToProcess.find(g => g.gym_id === gymId) || {
           gym_name: 'Our Gym',
           phone: '9876543210',
           whatsapp_mode: 'redirect'

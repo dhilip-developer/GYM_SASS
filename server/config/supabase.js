@@ -61,6 +61,7 @@ if (isConfigured) {
         whatsapp_mode: 'redirect',
         email: 'owner@fitprogym.com',
         address: '123 Health Street, Fitness City',
+        whatsapp_schedule_time: '08:00',
         created_at: new Date().toISOString()
       }
     ],

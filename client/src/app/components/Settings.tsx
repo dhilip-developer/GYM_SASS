@@ -29,7 +29,8 @@ export function Settings() {
     whatsapp_number: '',
     email: '',
     address: '',
-    whatsapp_mode: 'redirect'
+    whatsapp_mode: 'redirect',
+    whatsapp_schedule_time: '08:00'
   });
   const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [isLoadingSettings, setIsLoadingSettings] = useState(true);
@@ -279,6 +280,21 @@ export function Settings() {
                       </SelectItem>
                     </SelectContent>
                   </Select>
+                </div>
+                
+                {/* Automated Expiry Reminder Schedule */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="whatsapp_schedule_time" className="text-slate-700 font-semibold text-xs">Automated Campaign Time</Label>
+                  <Input
+                    type="time"
+                    id="whatsapp_schedule_time"
+                    value={gymSettings.whatsapp_schedule_time || '08:00'}
+                    onChange={(e) => setGymSettings(prev => ({ ...prev, whatsapp_schedule_time: e.target.value }))}
+                    className="rounded-xl h-11 border-slate-200 focus:border-red-500 focus:ring-red-500"
+                  />
+                  <p className="text-xs text-slate-400 font-medium mt-1">
+                    The time daily automated expiry reminders are sent via the local agent.
+                  </p>
                   <div className="mt-2">
                     {gymSettings.whatsapp_mode === 'server_session' ? (
                       <div className="flex flex-col gap-2">
