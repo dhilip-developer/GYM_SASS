@@ -14,7 +14,15 @@ import {
   Bell,
   Plus,
   Dumbbell,
-  ChevronRight
+  ChevronRight,
+  QrCode,
+  Target,
+  Megaphone,
+  CreditCard,
+  ClipboardList,
+  Building2,
+  Users2,
+  TrendingUp
 } from 'lucide-react';
 import { Button } from './ui/button';
 import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
@@ -65,24 +73,35 @@ export function Root() {
     navigate('/login');
   };
 
+  const userRole = user?.user_metadata?.role || 'staff';
+
   const navigation = [
-    { name: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { name: 'Dashboard', href: '/', icon: LayoutDashboard, roles: ['gym_admin'] },
+    { name: 'Attendance', href: '/attendance', icon: ClipboardList, roles: ['gym_admin', 'staff'] },
     {
       name: 'All Members',
       href: '/members',
       icon: Users,
+      roles: ['gym_admin'],
       badge: stats.expired > 0 ? { count: stats.expired, color: 'bg-red-500 text-white' } : null
     },
-    { name: 'Register Member', href: '/register', icon: UserPlus },
+    { name: 'Register Member', href: '/register', icon: UserPlus, roles: ['gym_admin'] },
     {
       name: 'Auto Messages',
       href: '/messages',
       icon: MessageSquare,
+      roles: ['gym_admin'],
       badge: stats.expiring_soon > 0 ? { count: stats.expiring_soon, color: 'bg-amber-500 text-white' } : null
     },
-    { name: 'Unpaid / Expired', href: '/unpaid', icon: XCircle },
-    { name: 'Settings', href: '/settings', icon: SettingsIcon },
-  ];
+    { name: 'Leads & Enquiries', href: '/leads', icon: Target, roles: ['gym_admin', 'staff'] },
+    { name: 'Announcements', href: '/announcements', icon: Megaphone, roles: ['gym_admin'] },
+    { name: 'Branches', href: '/branches', icon: Building2, roles: ['gym_admin'] },
+    { name: 'Trainers', href: '/trainers', icon: Users2, roles: ['gym_admin'] },
+    { name: 'Revenue Report', href: '/revenue', icon: TrendingUp, roles: ['gym_admin'] },
+    { name: 'WhatsApp Session', href: '/whatsapp', icon: QrCode, roles: ['gym_admin'] },
+    { name: 'Payment Collection', href: '/pending-payments', icon: CreditCard, roles: ['gym_admin'] },
+    { name: 'Settings', href: '/settings', icon: SettingsIcon, roles: ['gym_admin'] },
+  ].filter(nav => nav.roles.includes(userRole));
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full bg-[#0f0f0f]">

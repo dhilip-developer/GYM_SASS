@@ -8,7 +8,8 @@ router.get('/', authMiddleware, async (req, res) => {
   try {
     const { data, error } = await supabase
       .from('gym_settings')
-      .select('*');
+      .select('*')
+      .eq('gym_id', req.gymId);
 
     if (error) throw error;
 
@@ -25,7 +26,7 @@ router.get('/', authMiddleware, async (req, res) => {
 
 // POST /api/settings (UPSERT single settings row)
 router.post('/', authMiddleware, async (req, res) => {
-  const { gym_name, owner_name, phone, whatsapp_number, email, address } = req.body;
+  const { gym_name, owner_name, phone, whatsapp_number, email, address, whatsapp_mode } = req.body;
 
   if (!gym_name || !owner_name || !phone) {
     return res.status(400).json({ error: 'Gym name, owner name, and phone number are required' });
@@ -35,7 +36,8 @@ router.post('/', authMiddleware, async (req, res) => {
     // Check if a row already exists
     const { data: existing, error: fetchError } = await supabase
       .from('gym_settings')
-      .select('id');
+      .select('id')
+      .eq('gym_id', req.gymId);
 
     if (fetchError) throw fetchError;
 
@@ -50,10 +52,12 @@ router.post('/', authMiddleware, async (req, res) => {
           owner_name,
           phone,
           whatsapp_number: whatsapp_number || null,
+          whatsapp_mode: whatsapp_mode || 'redirect',
           email: email || null,
           address: address || null
         })
         .eq('id', existing[0].id)
+        .eq('gym_id', req.gymId)
         .select()
         .single();
 
@@ -68,8 +72,10 @@ router.post('/', authMiddleware, async (req, res) => {
           owner_name,
           phone,
           whatsapp_number: whatsapp_number || null,
+          whatsapp_mode: whatsapp_mode || 'redirect',
           email: email || null,
-          address: address || null
+          address: address || null,
+          gym_id: req.gymId
         })
         .select()
         .single();
@@ -91,6 +97,7 @@ router.get('/plans', authMiddleware, async (req, res) => {
     const { data, error } = await supabase
       .from('plans')
       .select('*')
+      .eq('gym_id', req.gymId)
       .order('price', { ascending: true });
 
     if (error) throw error;
@@ -118,7 +125,8 @@ router.post('/plans', authMiddleware, async (req, res) => {
         duration_days: parseInt(duration_days),
         price: parseFloat(price),
         description: description || null,
-        is_active: true
+        is_active: true,
+        gym_id: req.gymId
       })
       .select()
       .single();
@@ -149,6 +157,7 @@ router.put('/plans/:id', authMiddleware, async (req, res) => {
       .from('plans')
       .update(updateData)
       .eq('id', id)
+      .eq('gym_id', req.gymId)
       .select()
       .single();
 

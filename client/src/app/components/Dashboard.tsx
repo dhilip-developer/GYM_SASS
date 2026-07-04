@@ -11,10 +11,13 @@ import {
   ArrowRight,
   TrendingUp,
   CreditCard,
-  Bell
+  Bell,
+  Cake,
+  Send
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
+import { toast } from 'sonner';
 
 export function Dashboard() {
   const navigate = useNavigate();
@@ -27,26 +30,26 @@ export function Dashboard() {
   });
   const [recentAlerts, setRecentAlerts] = useState<any[]>([]);
   const [recentMembers, setRecentMembers] = useState<any[]>([]);
+  const [birthdays, setBirthdays] = useState<any[]>([]);
+  const [gymSettings, setGymSettings] = useState<any>({});
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchDashboardData = async () => {
     setIsLoading(true);
     try {
-      const [statsRes, alertsRes, membersRes] = await Promise.all([
+      const [statsRes, alertsRes, membersRes, birthdaysRes, settingsRes] = await Promise.all([
         axiosInstance.get('/api/memberships/stats'),
         axiosInstance.get('/api/messages/logs?limit=10'),
-        axiosInstance.get('/api/members?limit=5')
+        axiosInstance.get('/api/members?limit=5'),
+        axiosInstance.get('/api/members/birthdays/today'),
+        axiosInstance.get('/api/settings')
       ]);
 
-      if (statsRes.data) {
-        setStats(statsRes.data);
-      }
-      if (alertsRes.data && alertsRes.data.logs) {
-        setRecentAlerts(alertsRes.data.logs.slice(0, 10));
-      }
-      if (membersRes.data && membersRes.data.members) {
-        setRecentMembers(membersRes.data.members.slice(0, 5));
-      }
+      if (statsRes.data) setStats(statsRes.data);
+      if (alertsRes.data?.logs) setRecentAlerts(alertsRes.data.logs.slice(0, 10));
+      if (membersRes.data?.members) setRecentMembers(membersRes.data.members.slice(0, 5));
+      if (birthdaysRes.data?.birthdays) setBirthdays(birthdaysRes.data.birthdays);
+      if (settingsRes.data) setGymSettings(settingsRes.data);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
@@ -130,6 +133,26 @@ export function Dashboard() {
     );
   }
 
+  // Send Happy Birthday WhatsApp
+  const sendBirthdayMessage = (member: any) => {
+    const gymName = gymSettings?.gym_name || 'our gym';
+    const msg = `🎂 Happy Birthday ${member.full_name}! Wishing you a wonderful day. Thank you for being part of ${gymName}! 🎉`;
+    const mode = gymSettings?.whatsapp_mode || 'redirect';
+    if (mode === 'server_session') {
+      axiosInstance.post('/api/messages/send-manual', {
+        member_id: member.id,
+        trigger_type: 'expired', // reuse template slot
+        send_mode: 'server_session',
+        override_message: msg
+      }).then(() => toast.success(`Birthday message sent to ${member.full_name} 🎉`))
+        .catch(() => toast.error('Failed to send birthday message'));
+    } else {
+      let phone = member.phone.replace(/\D/g, '');
+      if (phone.length === 10) phone = '91' + phone;
+      window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
+    }
+  };
+
   return (
     <div className="space-y-8">
       <div className="sticky top-0 z-10 bg-[#f7f7f7] pt-6 pb-3 -mx-4 px-4 lg:-mx-8 lg:px-8 border-b border-black/5 mb-4">
@@ -196,6 +219,46 @@ export function Dashboard() {
         </Card>
       </div>
 
+      {/* 🎂 Birthday Reminders */}
+      {birthdays.length > 0 && (
+        <Card className="bg-gradient-to-r from-pink-50 to-rose-50 border border-pink-200 shadow-sm rounded-2xl overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between border-b border-pink-100 pb-4">
+            <div className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-xl bg-pink-500 flex items-center justify-center shadow-md shadow-pink-200">
+                <Cake className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <CardTitle className="text-base font-bold text-slate-800">🎂 Birthdays Today!</CardTitle>
+                <CardDescription className="text-xs text-pink-600 font-semibold">{birthdays.length} member{birthdays.length > 1 ? 's' : ''} celebrating today — wish them!</CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="p-4">
+            <div className="flex flex-wrap gap-3">
+              {birthdays.map(m => (
+                <div key={m.id} className="flex items-center gap-3 bg-white rounded-xl px-4 py-2.5 border border-pink-100 shadow-sm">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-white font-extrabold text-sm shrink-0">
+                    {m.full_name.charAt(0).toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-sm font-bold text-slate-800 leading-tight">{m.full_name}</p>
+                    <p className="text-xs text-slate-400 font-medium">{m.phone}</p>
+                  </div>
+                  <Button
+                    size="sm"
+                    onClick={() => sendBirthdayMessage(m)}
+                    className="ml-2 bg-green-500 hover:bg-green-600 text-white rounded-xl text-xs font-bold px-3 py-1.5 h-auto shadow-sm"
+                  >
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 mr-1 fill-current"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.74.002-2.523-.979-4.9-2.766-6.67C16.89 2.417 14.542 1.42 12.013 1.42c-5.442 0-9.867 4.373-9.87 9.741a9.553 9.553 0 001.493 5.116l-.984 3.593 3.698-.958zm12.502-6.52c-.3-.15-1.782-.88-2.057-.98-.275-.1-.475-.15-.675.15-.2.3-.775.98-.95 1.18-.175.2-.35.225-.65.075-.3-.15-1.266-.467-2.41-1.485-.89-.795-1.49-1.777-1.665-2.078-.175-.3-.018-.462.13-.61.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.675-1.625-.925-2.225-.244-.589-.491-.51-.675-.52-.175-.01-.375-.01-.575-.01-.2 0-.525.075-.8 3.75a2.723 2.723 0 00.575 1.625c.075.1 1.83 2.795 4.43 3.92.62.268 1.1.428 1.477.548.623.198 1.19.17 1.637.103.498-.074 1.782-.73 2.032-1.432.25-.7.25-1.3.175-1.433-.075-.133-.275-.213-.575-.363z"/></svg>
+                    Wish
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Grid: Recent Alerts & Recent Members */}
       <div className="grid gap-6 md:grid-cols-2">
         {/* Left: Recent Alerts */}
@@ -232,7 +295,13 @@ export function Dashboard() {
                     </div>
                     <div className="text-right">
                       <span className="text-[10px] text-slate-400 font-bold block">
-                        {formatDistanceToNow(new Date(log.sent_at), { addSuffix: true })}
+                        {(() => {
+                          try {
+                            const d = log.sent_at ? new Date(log.sent_at) : null;
+                            if (!d || isNaN(d.getTime())) return 'Just now';
+                            return formatDistanceToNow(d, { addSuffix: true });
+                          } catch { return 'Just now'; }
+                        })()}
                       </span>
                     </div>
                   </div>

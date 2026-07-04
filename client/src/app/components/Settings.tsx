@@ -28,7 +28,8 @@ export function Settings() {
     phone: '',
     whatsapp_number: '',
     email: '',
-    address: ''
+    address: '',
+    whatsapp_mode: 'redirect'
   });
   const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [isLoadingSettings, setIsLoadingSettings] = useState(true);
@@ -251,6 +252,55 @@ export function Settings() {
                     placeholder="WhatsApp contact number"
                     className="rounded-xl h-11 border-slate-200 focus:border-red-500 focus:ring-red-500"
                   />
+                </div>
+
+                {/* WhatsApp Routing Mode */}
+                <div className="space-y-1.5">
+                  <Label htmlFor="whatsapp_mode" className="text-slate-700 font-semibold text-xs">WhatsApp Send Method</Label>
+                  <Select 
+                    value={gymSettings.whatsapp_mode || 'redirect'} 
+                    onValueChange={(val) => setGymSettings(prev => ({ ...prev, whatsapp_mode: val }))}
+                  >
+                    <SelectTrigger id="whatsapp_mode" className="rounded-xl h-11 border-slate-200 focus:border-red-500 focus:ring-red-500 bg-white">
+                      <SelectValue placeholder="Select method" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="redirect">
+                        <div className="flex flex-col gap-0.5 py-0.5">
+                          <span className="font-semibold text-slate-800">Send via Link</span>
+                          <span className="text-xs text-slate-400 font-normal">Opens WhatsApp Web in browser with pre-filled message</span>
+                        </div>
+                      </SelectItem>
+                      <SelectItem value="server_session">
+                        <div className="flex flex-col gap-0.5 py-0.5">
+                          <span className="font-semibold text-slate-800">Send via Session</span>
+                          <span className="text-xs text-slate-400 font-normal">Sends silently using saved QR-linked server session</span>
+                        </div>
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <div className="mt-2">
+                    {gymSettings.whatsapp_mode === 'server_session' ? (
+                      <div className="flex flex-col gap-2">
+                        <p className="text-xs text-amber-600 font-medium bg-amber-50 p-2 rounded-lg border border-amber-100">
+                          ⚡ Session mode: Messages will send silently from the server. You must link your device!
+                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => window.location.href = '/whatsapp'}
+                          className="w-full text-xs font-bold border-red-200 text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          Go to WhatsApp QR Setup →
+                        </Button>
+                      </div>
+                    ) : (
+                      <p className="text-xs text-slate-400 font-medium">
+                        🔗 Link mode: clicking WhatsApp will open a pre-filled chat in your browser.
+                      </p>
+                    )}
+                  </div>
                 </div>
 
                 {/* Email Address */}

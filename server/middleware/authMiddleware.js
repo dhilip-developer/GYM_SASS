@@ -16,6 +16,8 @@ const authMiddleware = async (req, res, next) => {
     }
 
     req.user = user;
+    req.gymId = user.user_metadata?.gym_id || null;
+    req.role = user.user_metadata?.role || 'staff';
     next();
   } catch (err) {
     console.error('Auth middleware error:', err.message);

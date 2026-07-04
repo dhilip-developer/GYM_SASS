@@ -22,6 +22,33 @@ const addDays = (dateStr, days) => {
   return `${year}-${month}-${day}`;
 };
 
+// GET /api/members/birthdays/today (protected)
+router.get('/birthdays/today', authMiddleware, async (req, res) => {
+  try {
+    const today = new Date();
+    const todayMM = String(today.getMonth() + 1).padStart(2, '0');
+    const todayDD = String(today.getDate()).padStart(2, '0');
+
+    const { data: allMembers, error } = await supabase
+      .from('members')
+      .select('id, full_name, phone, dob')
+      .eq('gym_id', req.gymId);
+
+    if (error) throw error;
+
+    const birthdays = (allMembers || []).filter(m => {
+      if (!m.dob) return false;
+      const parts = m.dob.split('-'); // YYYY-MM-DD
+      return parts[1] === todayMM && parts[2] === todayDD;
+    });
+
+    return res.json({ birthdays });
+  } catch (err) {
+    console.error('Birthday fetch error:', err.message);
+    return res.status(500).json({ error: 'Failed to fetch birthdays' });
+  }
+});
+
 // GET /api/members (all protected)
 // Query params: ?status=active|expired|expiring|unpaid&search=text&page=1&limit=20
 router.get('/', authMiddleware, async (req, res) => {
@@ -53,6 +80,7 @@ router.get('/', authMiddleware, async (req, res) => {
           )
         )
       `)
+      .eq('gym_id', req.gymId)
       .order('created_at', { ascending: false });
 
     if (error) {
@@ -160,6 +188,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
         )
       `)
       .eq('id', id)
+      .eq('gym_id', req.gymId)
       .single();
 
     if (error || !member) {
@@ -231,6 +260,7 @@ router.post('/', authMiddleware, async (req, res) => {
       .from('members')
       .select('id')
       .eq('phone', phone)
+      .eq('gym_id', req.gymId)
       .maybeSingle();
 
     if (phoneCheckError) throw phoneCheckError;
@@ -243,6 +273,7 @@ router.post('/', authMiddleware, async (req, res) => {
       .from('plans')
       .select('*')
       .eq('id', plan_id)
+      .eq('gym_id', req.gymId)
       .single();
 
     if (planError || !plan) {
@@ -261,7 +292,8 @@ router.post('/', authMiddleware, async (req, res) => {
         email: email || null,
         dob: dob || null,
         gender: gender || null,
-        address: address || null
+        address: address || null,
+        gym_id: req.gymId
       })
       .select()
       .single();
@@ -288,7 +320,8 @@ router.post('/', authMiddleware, async (req, res) => {
         payment_status,
         amount_paid: payment_status === 'paid' ? (amount_paid || plan.price) : 0,
         payment_mode: payment_status === 'paid' ? payment_mode : null,
-        status: calculatedStatus
+        status: calculatedStatus,
+        gym_id: req.gymId
       })
       .select(`
         *,
@@ -339,6 +372,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
         .from('members')
         .select('id')
         .eq('phone', phone)
+        .eq('gym_id', req.gymId)
         .neq('id', id)
         .maybeSingle();
 
@@ -358,6 +392,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
       .from('members')
       .update(updateData)
       .eq('id', id)
+      .eq('gym_id', req.gymId)
       .select()
       .single();
 
@@ -455,6 +490,37 @@ router.put('/:id', authMiddleware, async (req, res) => {
   }
 });
 
+// PATCH /api/members/:id/followup (protected) — update follow-up call status
+router.patch('/:id/followup', authMiddleware, async (req, res) => {
+  const { id } = req.params;
+  const { followup_status, followup_note } = req.body;
+
+  const VALID_STATUSES = ['none', 'spoke', 'didnt_pick', 'call_back', 'not_interested', 'interested', 'rejoined'];
+  if (followup_status && !VALID_STATUSES.includes(followup_status)) {
+    return res.status(400).json({ error: 'Invalid followup_status value' });
+  }
+
+  try {
+    const updateData = { updated_at: new Date().toISOString() };
+    if (followup_status !== undefined) updateData.followup_status = followup_status;
+    if (followup_note !== undefined) updateData.followup_note = followup_note || null;
+
+    const { data: member, error } = await supabase
+      .from('members')
+      .update(updateData)
+      .eq('id', id)
+      .eq('gym_id', req.gymId)
+      .select()
+      .single();
+
+    if (error) throw error;
+    return res.json({ member });
+  } catch (err) {
+    console.error('Update followup error:', err.message);
+    return res.status(500).json({ error: 'Failed to update follow-up status' });
+  }
+});
+
 // DELETE /api/members/:id (protected)
 router.delete('/:id', authMiddleware, async (req, res) => {
   const { id } = req.params;
@@ -463,7 +529,8 @@ router.delete('/:id', authMiddleware, async (req, res) => {
     const { error } = await supabase
       .from('members')
       .delete()
-      .eq('id', id);
+      .eq('id', id)
+      .eq('gym_id', req.gymId);
 
     if (error) throw error;
 

@@ -1,0 +1,284 @@
+{
+  "gym_settings": [
+    {
+      "id": "settings-1",
+      "gym_name": "FitPro Gym",
+      "owner_name": "Alex Johnson",
+      "phone": "8122715213",
+      "whatsapp_number": "8122715213",
+      "whatsapp_mode": "server_session",
+      "email": "owner@fitprogym.com",
+      "address": "123 Health Street, Fitness City",
+      "created_at": "2026-06-29T19:32:20.512Z"
+    },
+    {
+      "id": "3gszr71vb",
+      "created_at": "2026-07-04T20:04:19.842Z",
+      "gym_name": "raj",
+      "owner_name": "ad",
+      "phone": "08122715213",
+      "whatsapp_number": null,
+      "email": "mageshwar.offic@gmail.com",
+      "address": null,
+      "gym_id": "g-1",
+      "updated_at": "2026-07-04T20:17:29.650Z"
+    }
+  ],
+  "plans": [
+    {
+      "id": "p1",
+      "name": "Monthly",
+      "duration_days": 30,
+      "price": 800,
+      "description": "1 month membership",
+      "is_active": true,
+      "gym_id": "g-1"
+    },
+    {
+      "id": "p2",
+      "name": "Quarterly",
+      "duration_days": 90,
+      "price": 2100,
+      "description": "3 months membership",
+      "is_active": true,
+      "gym_id": "g-1"
+    },
+    {
+      "id": "p3",
+      "name": "Half-yearly",
+      "duration_days": 180,
+      "price": 3800,
+      "description": "6 months membership",
+      "is_active": true,
+      "gym_id": "g-1"
+    },
+    {
+      "id": "p4",
+      "name": "Annual",
+      "duration_days": 365,
+      "price": 6500,
+      "description": "1 year membership",
+      "is_active": true,
+      "gym_id": "g-1"
+    }
+  ],
+  "members": [
+    {
+      "id": "m-active",
+      "full_name": "John Active",
+      "phone": "9876543210",
+      "email": "john.active@gmail.com",
+      "dob": "1995-05-15",
+      "gender": "Male",
+      "address": "123 Fitness Street",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "updated_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "m-expiring",
+      "full_name": "Sarah Expiring",
+      "phone": "9876543211",
+      "email": "sarah.expiring@gmail.com",
+      "dob": "1997-08-20",
+      "gender": "Female",
+      "address": "456 Muscle Avenue",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "updated_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "m-expired",
+      "full_name": "Bob Expired",
+      "phone": "9876543212",
+      "email": "bob.expired@gmail.com",
+      "dob": "1990-12-05",
+      "gender": "Male",
+      "address": "789 Power Road",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "updated_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "m-unpaid",
+      "full_name": "Alice Unpaid",
+      "phone": "9876543213",
+      "email": "alice.unpaid@gmail.com",
+      "dob": "1994-03-25",
+      "gender": "Female",
+      "address": "101 Flex Blvd",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "updated_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "m-ashraf",
+      "full_name": "Ashraf Ali",
+      "phone": "7305041971",
+      "email": "ashraf.ali@gmail.com",
+      "dob": "1992-04-10",
+      "gender": "Male",
+      "address": "22 Crescent Lane, Chennai",
+      "created_at": "2026-07-05T00:09:00.000Z",
+      "updated_at": "2026-07-05T00:09:00.000Z",
+      "gym_id": "g-1"
+    }
+  ],
+  "memberships": [
+    {
+      "id": "ms-active",
+      "member_id": "m-active",
+      "plan_id": "p1",
+      "start_date": "2026-06-14",
+      "end_date": "2026-07-14",
+      "payment_status": "paid",
+      "amount_paid": 800,
+      "payment_mode": "cash",
+      "status": "active",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "ms-expiring",
+      "member_id": "m-expiring",
+      "plan_id": "p1",
+      "start_date": "2026-06-05",
+      "end_date": "2026-07-05",
+      "payment_status": "paid",
+      "amount_paid": 800,
+      "payment_mode": "cash",
+      "status": "active",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "ms-expired",
+      "member_id": "m-expired",
+      "plan_id": "p1",
+      "start_date": "2026-05-30",
+      "end_date": "2026-06-29",
+      "payment_status": "paid",
+      "amount_paid": 800,
+      "payment_mode": "cash",
+      "status": "expired",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "ms-unpaid",
+      "member_id": "m-unpaid",
+      "plan_id": "p1",
+      "start_date": "2026-06-24",
+      "end_date": "2026-07-24",
+      "payment_status": "pending",
+      "amount_paid": 0,
+      "payment_mode": null,
+      "status": "active",
+      "created_at": "2026-06-29T19:32:20.512Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "ms-ashraf",
+      "member_id": "m-ashraf",
+      "plan_id": "p1",
+      "start_date": "2026-05-15",
+      "end_date": "2026-06-14",
+      "payment_status": "paid",
+      "amount_paid": 800,
+      "payment_mode": "cash",
+      "status": "expired",
+      "created_at": "2026-07-05T00:09:00.000Z",
+      "gym_id": "g-1"
+    }
+  ],
+  "message_templates": [
+    {
+      "id": "t1",
+      "trigger_type": "expiry_3day",
+      "template_body": "Hi {Name}, your {GymName} membership expires in 3 days on {ExpiryDate}. Renew now! Contact: {OwnerPhone}",
+      "is_active": true,
+      "updated_at": "2026-06-29T19:32:20.516Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "t2",
+      "trigger_type": "expiry_1day",
+      "template_body": "Hi {Name}, your {GymName} membership expires TOMORROW ({ExpiryDate}). Renew today! Call: {OwnerPhone}",
+      "is_active": true,
+      "updated_at": "2026-06-29T19:32:20.516Z",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "t3",
+      "trigger_type": "expired",
+      "template_body": "Hi {Name}, your {GymName} membership expired on {ExpiryDate}. We miss you! Renew anytime: {OwnerPhone}",
+      "is_active": true,
+      "updated_at": "2026-06-29T19:32:20.516Z",
+      "gym_id": "g-1"
+    }
+  ],
+  "message_logs": [
+    {
+      "id": "i5h9f4gud",
+      "created_at": "2026-07-04T18:39:56.876Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your FitPro Gym membership expired on 2026-06-14. We miss you! Renew anytime: 8122715213",
+      "status": "sent"
+    },
+    {
+      "id": "dw2eo29o2",
+      "created_at": "2026-07-04T18:42:25.410Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your FitPro Gym membership expired on 2026-06-14. We miss you! Renew anytime: 8122715213",
+      "status": "sent"
+    }
+  ],
+  "users": [
+    {
+      "id": "u-super",
+      "email": "super@gymos.com",
+      "role": "super_admin",
+      "gym_id": null,
+      "full_name": "Super Admin"
+    },
+    {
+      "id": "u-admin1",
+      "email": "owner@fitprogym.com",
+      "role": "gym_admin",
+      "gym_id": "g-1",
+      "full_name": "Alex Johnson"
+    },
+    {
+      "id": "u-staff1",
+      "email": "staff@fitprogym.com",
+      "role": "staff",
+      "gym_id": "g-1",
+      "full_name": "Front Desk"
+    }
+  ],
+  "gyms": [
+    {
+      "id": "g-1",
+      "name": "FitPro Gym",
+      "owner_id": "u-admin1",
+      "subscription_status": "active",
+      "billing_date": "2026-08-01",
+      "created_at": "2026-07-04T19:26:38.619Z"
+    }
+  ],
+  "branches": [
+    {
+      "id": "b-1",
+      "gym_id": "g-1",
+      "name": "Main Branch",
+      "location": "Downtown",
+      "created_at": "2026-07-04T19:26:38.620Z"
+    }
+  ],
+  "trainers": [],
+  "attendance": []
+}

@@ -1,0 +1,113 @@
+====================================================================
+  GymOS — FEATURE WISHLIST (From a Gym Owner's Point of View)
+  Reviewed by: [Your Name]   Date: July 2026
+====================================================================
+
+Review each item below and mark:
+  [YES] - Build this
+  [NO]  - Skip for now
+  [LATER] - Future version
+
+====================================================================
+PRIORITY 1 — MUST HAVE (I use this EVERY DAY)
+====================================================================
+
+[ YES] 1. FOLLOW-UP STATUS PER MEMBER
+    - When a member expires, I call them to renew.
+    - I need to mark what happened: "Spoke", "Didn't Pick", "Call Back Later",
+      "Not Interested", "Interested", "Rejoined"
+    - Show this status badge in the members list
+    - Filter members by follow-up status (e.g. show all "Didn't Pick" so I call again)
+    - (THIS IS ALREADY BEING BUILT NOW)
+
+[ yes but i dont want to implement it here later i will explain] 2. ATTENDANCE TRACKING (Daily Check-In)
+    - I need to know who came to the gym today
+    - Simple: Mark attendance when member enters (scan or manual tick)
+    - Show today's attendance count on the dashboard
+    - See who hasn't come in 7+ days (so I can check on them)
+
+[yes] 3. PAYMENT COLLECTION DASHBOARD
+    - Show who hasn't paid for this month clearly
+    - Show total expected revenue vs actual collected
+    - Quick "Mark as Paid" button with payment method (Cash / UPI / Card)
+    - Print or send a payment receipt to the member via WhatsApp
+
+[Yes] 4. BULK WHATSAPP MESSAGE TO ALL EXPIRED MEMBERS AT ONCE
+    - Right now I have to click one by one for each member
+    - I need a "Send to All Expired" button that messages everyone in one go
+    - Same for "Expiring in 3 days" — message all at once
+
+[Yes] 5. MEMBER BIRTHDAY REMINDERS
+    - Show today's birthdays on the dashboard
+    - Auto-send "Happy Birthday" WhatsApp message on their birthday
+    - Builds loyalty — members feel special
+
+====================================================================
+PRIORITY 2 — VERY USEFUL (I need this EVERY WEEK)
+====================================================================
+
+[that also i have plan i will say later ] 6. MONTHLY REVENUE REPORT
+    - How much money I collected this month
+    - Bar chart: Income per month for the last 6 months
+    - Which plans are most popular (Monthly / Quarterly / Annual)
+    - Download report as PDF or Excel
+
+[Yes ] 7. MEMBER ENQUIRY / LEAD TRACKING
+    - When someone visits the gym but hasn't joined yet, I want to save their details
+    - Name, Phone, Interest, Date visited
+    - Follow up with them (same follow-up status system as above)
+    - Convert enquiry to member when they join
+
+[ yes but optional not manditory ] 8. MEMBER PROFILE PHOTO
+    - Add a photo when registering a member
+    - Show their face in the member list — easier to identify
+
+[YES ] 9. RENEWAL HISTORY PER MEMBER
+    - When I open a member's profile, I want to see all their past memberships
+    - How long have they been with us, total money paid
+
+[yes but i tell later what you need to do ] 10. TRAINER / STAFF ASSIGNMENT
+    - Assign a trainer to each member
+    - See which trainer has how many members
+    - Track trainer's salary / commission
+
+====================================================================
+PRIORITY 3 — GOOD TO HAVE (Future improvements)
+====================================================================
+
+[ ] 11. DIET & WORKOUT PLAN ASSIGNMENT
+    - Assign a basic diet chart or workout plan PDF to a member
+    - Send it to them via WhatsApp
+
+[ ] 12. MEMBER SELF-SERVICE PORTAL (Mobile App or Web)
+    - Member can check their own membership status, expiry date
+    - Pay online for renewal
+    - Download their receipt
+
+[ ] 13. LOCKER / EQUIPMENT TRACKING
+    - Track which locker is assigned to which member
+    - Equipment check-in / check-out
+
+[Yes] 14. GYM GALLERY / ANNOUNCEMENTS
+    - Post announcements to all members via WhatsApp (e.g. "Holiday on Sunday")
+    - Share gym achievement photos
+
+[ yes] 15. MULTI-BRANCH SUPPORT
+    - If I open a second gym location, manage both from same software
+    - Separate reports per branch
+
+====================================================================
+QUICK FIXES (Small things that should be better RIGHT NOW)
+====================================================================
+
+[ ] A. Member search should also search by phone number
+[ ] B. When I add a member, auto-fill the end date based on plan selected
+[ ] C. Dashboard should show "Today's Expiring" not just "Expiring Soon"
+[ ] D. WhatsApp message preview before sending — let me see the text first
+[ ] E. Dark mode / better mobile view for use on my phone
+[ ] F. Ability to add notes/comments on a member (e.g. "Has knee injury")
+
+====================================================================
+  Please review and mark [YES] / [NO] / [LATER] on each item
+  Then share back — we'll build in priority order!
+====================================================================

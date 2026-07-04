@@ -28,9 +28,16 @@ router.get('/stats', authMiddleware, async (req, res) => {
     // Fetch all members with their memberships
     const { data: members, error } = await supabase
       .from('members')
-      .select('id, memberships(end_date, payment_status, status)');
+      .select('id, memberships(end_date, payment_status, status, amount_paid, start_date)')
+      .eq('gym_id', req.gymId);
 
-    if (error) throw error;
+    // Also fetch all memberships to calculate this month's revenue
+    const { data: allMemberships, error: memError } = await supabase
+      .from('memberships')
+      .select('amount_paid, payment_status, updated_at')
+      .eq('gym_id', req.gymId);
+
+    if (error || memError) throw error || memError;
 
     const todayStr = getTodayStr();
     const today = new Date(todayStr);
@@ -76,12 +83,29 @@ router.get('/stats', authMiddleware, async (req, res) => {
       }
     });
 
+    let revenue_this_month = 0;
+    const currentMonth = new Date().getMonth();
+    const currentYear = new Date().getFullYear();
+
+    if (allMemberships) {
+      allMemberships.forEach(m => {
+        if (m.payment_status === 'paid' && m.amount_paid) {
+          // If updated_at exists, use it, else fallback to today
+          const d = m.updated_at ? new Date(m.updated_at) : new Date();
+          if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) {
+            revenue_this_month += (m.amount_paid || 0);
+          }
+        }
+      });
+    }
+
     return res.json({
       total,
       active,
       expired,
       expiring_soon,
-      unpaid
+      unpaid,
+      revenue_this_month
     });
   } catch (err) {
     console.error('Membership stats error:', err.message);

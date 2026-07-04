@@ -3,8 +3,9 @@ const router = express.Router();
 const axios = require('axios');
 const { supabase } = require('../config/supabase');
 const authMiddleware = require('../middleware/authMiddleware');
+const whatsappManager = require('../utils/whatsapp');
 
-const { getTodayStr, addDays, sendSMS, formatMessage } = require('../utils/sms');
+const { getTodayStr, addDays, formatMessage } = require('../utils/sms'); // still used for formatting/dates
 
 // GET /api/messages/templates (protected)
 router.get('/templates', authMiddleware, async (req, res) => {
@@ -12,6 +13,7 @@ router.get('/templates', authMiddleware, async (req, res) => {
     const { data, error } = await supabase
       .from('message_templates')
       .select('*')
+      .eq('gym_id', req.gymId)
       .order('trigger_type', { ascending: true });
 
     if (error) throw error;
@@ -36,6 +38,7 @@ router.put('/templates/:id', authMiddleware, async (req, res) => {
       .from('message_templates')
       .update(updateData)
       .eq('id', id)
+      .eq('gym_id', req.gymId)
       .select()
       .single();
 
@@ -67,6 +70,7 @@ router.get('/logs', authMiddleware, async (req, res) => {
           phone
         )
       `, { count: 'exact' })
+      .eq('gym_id', req.gymId)
       .order('sent_at', { ascending: false })
       .range(from, to);
 
@@ -87,7 +91,7 @@ router.get('/logs', authMiddleware, async (req, res) => {
 // POST /api/messages/send-manual (protected)
 // Body: { member_id, trigger_type }
 router.post('/send-manual', authMiddleware, async (req, res) => {
-  const { member_id, trigger_type } = req.body;
+  const { member_id, trigger_type, send_mode } = req.body;
 
   if (!member_id || !trigger_type) {
     return res.status(400).json({ error: 'Member ID and trigger type are required' });
@@ -99,6 +103,7 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
       .from('members')
       .select('*')
       .eq('id', member_id)
+      .eq('gym_id', req.gymId)
       .single();
 
     if (memberError || !member) {
@@ -110,6 +115,7 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
       .from('message_templates')
       .select('*')
       .eq('trigger_type', trigger_type)
+      .eq('gym_id', req.gymId)
       .single();
 
     if (templateError || !template) {
@@ -119,7 +125,8 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
     // 3. Fetch gym settings
     const { data: settingsList, error: settingsError } = await supabase
       .from('gym_settings')
-      .select('*');
+      .select('*')
+      .eq('gym_id', req.gymId);
 
     if (settingsError) throw settingsError;
 
@@ -133,6 +140,7 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
       .from('memberships')
       .select('id, end_date')
       .eq('member_id', member_id)
+      .eq('gym_id', req.gymId)
       .order('end_date', { ascending: false });
 
     if (membershipError) throw membershipError;
@@ -148,8 +156,25 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
       ownerPhone: settings.phone
     });
 
-    // 6. Send SMS
-    const sendResult = await sendSMS(member.phone, formattedMessage);
+    const mode = send_mode || settings.whatsapp_mode || 'redirect';
+    let sendResult = { success: false, error: 'Unknown routing' };
+
+    if (mode === 'server_session' || send_mode === 'whatsapp') {
+      const session = whatsappManager.getSession(req.gymId);
+      if (session.getStatus().status !== 'connected') {
+        return res.status(400).json({ 
+          error: 'WhatsApp session is not connected. Please go to the WhatsApp tab to link your device.' 
+        });
+      }
+      try {
+        await session.sendMessage(member.phone, formattedMessage);
+        sendResult = { success: true };
+      } catch (err) {
+        sendResult = { success: false, error: err.message };
+      }
+    } else {
+      return res.status(400).json({ error: 'Manual sends from the backend require WhatsApp session mode.' });
+    }
 
     // 7. Insert message log
     const { error: logError } = await supabase
@@ -159,13 +184,14 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
         membership_id: latestMembership ? latestMembership.id : null,
         trigger_type,
         message_sent: formattedMessage,
-        status: sendResult.success ? 'sent' : 'failed'
+        status: sendResult.success ? 'sent' : 'failed',
+        gym_id: req.gymId
       });
 
     if (logError) throw logError;
 
     if (!sendResult.success) {
-      return res.status(500).json({ error: 'Failed to send SMS message', detail: sendResult.error });
+      return res.status(500).json({ error: 'Failed to send message', detail: sendResult.error });
     }
 
     return res.json({ message: 'Message sent successfully' });
@@ -190,6 +216,7 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
       .from('message_templates')
       .select('*')
       .eq('trigger_type', trigger_type)
+      .eq('gym_id', req.gymId)
       .single();
 
     if (templateError || !template) {
@@ -203,7 +230,8 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
     // 2. Fetch gym settings
     const { data: settingsList, error: settingsError } = await supabase
       .from('gym_settings')
-      .select('*');
+      .select('*')
+      .eq('gym_id', req.gymId);
 
     if (settingsError) throw settingsError;
 
@@ -211,6 +239,15 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
       gym_name: 'Our Gym',
       phone: '9876543210'
     };
+
+    const mode = settings.whatsapp_mode || 'redirect';
+    const session = whatsappManager.getSession(req.gymId);
+    
+    if (mode !== 'server_session' || session.getStatus().status !== 'connected') {
+      return res.status(400).json({ 
+        error: 'Automated background campaigns require the WhatsApp Server Session to be connected. Please link your device in the WhatsApp tab and switch your mode to Session.' 
+      });
+    }
 
     // 3. Find qualifying members/memberships
     const todayStr = getTodayStr();
@@ -222,7 +259,8 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
         .from('memberships')
         .select('*, members(*)')
         .eq('end_date', targetDate)
-        .eq('status', 'active');
+        .eq('status', 'active')
+        .eq('gym_id', req.gymId);
       membershipsToNotify = data || [];
     } else if (trigger_type === 'expiry_1day') {
       const targetDate = addDays(todayStr, 1);
@@ -230,13 +268,15 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
         .from('memberships')
         .select('*, members(*)')
         .eq('end_date', targetDate)
-        .eq('status', 'active');
+        .eq('status', 'active')
+        .eq('gym_id', req.gymId);
       membershipsToNotify = data || [];
     } else if (trigger_type === 'expired') {
       // Fetch active memberships that are past end_date OR pending payment status
       const { data } = await supabase
         .from('memberships')
         .select('*, members(*)')
+        .eq('gym_id', req.gymId)
         .or(`end_date.lt.${todayStr},payment_status.eq.pending`);
       membershipsToNotify = data || [];
     }
@@ -256,7 +296,13 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
         ownerPhone: settings.phone
       });
 
-      const sendResult = await sendSMS(member.phone, formattedMessage);
+      let sendResult = { success: false };
+      try {
+        await session.sendMessage(member.phone, formattedMessage);
+        sendResult = { success: true };
+      } catch (err) {
+        sendResult = { success: false, error: err.message };
+      }
 
       // Insert log
       await supabase
@@ -266,7 +312,8 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
           membership_id: membership.id,
           trigger_type,
           message_sent: formattedMessage,
-          status: sendResult.success ? 'sent' : 'failed'
+          status: sendResult.success ? 'sent' : 'failed',
+          gym_id: req.gymId
         });
 
       if (sendResult.success) {
@@ -280,6 +327,74 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
   } catch (err) {
     console.error('Bulk send error:', err.message);
     return res.status(500).json({ error: 'Failed to process bulk message campaign' });
+  }
+});
+
+// ==========================================
+// LOCAL AGENT ENDPOINTS (Polling Mechanism)
+// ==========================================
+
+// GET /api/messages/pending?gym_id=XYZ
+router.get('/pending', async (req, res) => {
+  const { gym_id } = req.query;
+  if (!gym_id) return res.status(400).json({ error: 'gym_id is required' });
+
+  // In production, require an Agent API Key here to prevent unauthorized polling
+
+  try {
+    const { data, error } = await supabase
+      .from('pending_messages')
+      .select('*')
+      .eq('gym_id', gym_id)
+      .eq('status', 'pending');
+
+    if (error) throw error;
+    return res.json(data || []);
+  } catch (err) {
+    console.error('Fetch pending messages error:', err.message);
+    return res.status(500).json({ error: 'Failed to fetch pending messages' });
+  }
+});
+
+// POST /api/messages/complete
+router.post('/complete', async (req, res) => {
+  const { id, status, error: errorMsg } = req.body;
+  if (!id || !status) return res.status(400).json({ error: 'id and status are required' });
+
+  try {
+    // 1. Fetch the pending message
+    const { data: pendingMsg, error: fetchError } = await supabase
+      .from('pending_messages')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (fetchError || !pendingMsg) {
+      return res.status(404).json({ error: 'Pending message not found' });
+    }
+
+    // 2. Mark as completed/failed in pending table
+    await supabase
+      .from('pending_messages')
+      .update({ status, updated_at: new Date().toISOString() })
+      .eq('id', id);
+
+    // 3. Move it to the message_logs table
+    await supabase
+      .from('message_logs')
+      .insert({
+        member_id: pendingMsg.member_id,
+        membership_id: pendingMsg.membership_id,
+        trigger_type: pendingMsg.trigger_type,
+        message_sent: pendingMsg.message,
+        status: status,
+        gym_id: pendingMsg.gym_id
+      });
+
+    return res.json({ success: true });
+  } catch (err) {
+    console.error('Complete message error:', err.message);
+    return res.status(500).json({ error: 'Failed to complete message task' });
   }
 });
 

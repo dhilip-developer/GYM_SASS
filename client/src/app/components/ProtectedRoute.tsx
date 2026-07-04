@@ -4,10 +4,11 @@ import { useAuth } from '../../context/AuthContext';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
+  allowedRoles?: string[];
 }
 
-export function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { token, isLoading } = useAuth();
+export function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
+  const { token, user, isLoading } = useAuth();
 
   if (isLoading) {
     return (
@@ -17,8 +18,18 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
     );
   }
 
-  if (!token) {
+  if (!token || !user) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles) {
+    const userRole = user?.user_metadata?.role || 'staff';
+    if (!allowedRoles.includes(userRole)) {
+      // Redirect to a safe default page based on role if they try to access something unauthorized
+      if (userRole === 'super_admin') return <Navigate to="/super-admin" replace />;
+      if (userRole === 'gym_admin') return <Navigate to="/" replace />;
+      return <Navigate to="/attendance" replace />;
+    }
   }
 
   return <>{children}</>;
