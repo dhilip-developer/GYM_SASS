@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import axiosInstance from '../../api/axiosInstance';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
@@ -23,7 +24,7 @@ export function WhatsAppSession({ isEmbedded }: { isEmbedded?: boolean }) {
   // Poll connection status
   const fetchStatus = async () => {
     try {
-      const res = await axiosInstance.get('http://127.0.0.1:4000/api/whatsapp/status');
+      const res = await axios.get('http://127.0.0.1:4000/api/whatsapp/status');
       setSession(res.data);
     } catch (err) {
       console.error('Error fetching WhatsApp status:', err);
@@ -40,7 +41,7 @@ export function WhatsAppSession({ isEmbedded }: { isEmbedded?: boolean }) {
   const handleStartSession = async () => {
     setIsLoading(true);
     try {
-      await axiosInstance.post('http://127.0.0.1:4000/api/whatsapp/start');
+      await axios.post('http://127.0.0.1:4000/api/whatsapp/start');
       toast.success('Initializing WhatsApp client...');
       fetchStatus();
     } catch (err: any) {
@@ -54,7 +55,7 @@ export function WhatsAppSession({ isEmbedded }: { isEmbedded?: boolean }) {
   const handleStopSession = async () => {
     setIsLoading(true);
     try {
-      await axiosInstance.post('http://127.0.0.1:4000/api/whatsapp/stop');
+      await axios.post('http://127.0.0.1:4000/api/whatsapp/stop');
       toast.success('Session disconnected successfully');
       fetchStatus();
     } catch (err: any) {
@@ -178,7 +179,7 @@ export function WhatsAppSession({ isEmbedded }: { isEmbedded?: boolean }) {
                 disabled={isLoading}
                 className="rounded-xl border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-xs"
               >
-                Cancel Session
+                Remove Session
               </Button>
             </div>
           )}
@@ -226,10 +227,13 @@ export function WhatsAppSession({ isEmbedded }: { isEmbedded?: boolean }) {
                   {isLoading ? (
                     <>
                       <Loader2 className="w-3.5 h-3.5 mr-2 animate-spin" />
-                      Disconnecting...
+                      Removing...
                     </>
                   ) : (
-                    'Disconnect & Remove Session'
+                    <>
+                      <PowerOff className="w-4 h-4 mr-2" />
+                      Remove Session
+                    </>
                   )}
                 </Button>
               </div>

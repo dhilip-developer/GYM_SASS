@@ -27,8 +27,8 @@ const GYM_ID = process.env.GYM_ID || 'g-1';
 
 app.use(cors({
   origin: '*', // Allow the web app to hit this local server
-  methods: ['GET', 'POST'],
-  credentials: true
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
@@ -60,7 +60,7 @@ app.post('/api/whatsapp/stop', async (req, res) => {
   const reqGymId = req.query.gym_id || GYM_ID;
   const session = whatsappManager.getSession(reqGymId);
   try {
-    await session.stop();
+    await session.stopSession();
     res.json({ message: 'Session stopped' });
   } catch (err) {
     res.status(500).json({ error: err.message });
