@@ -21,7 +21,9 @@
       "email": "mageshwar.offic@gmail.com",
       "address": null,
       "gym_id": "g-1",
-      "updated_at": "2026-07-04T20:17:29.650Z"
+      "updated_at": "2026-07-05T13:50:44.527Z",
+      "whatsapp_mode": "server_session",
+      "whatsapp_schedule_time": "08:00"
     }
   ],
   "plans": [
@@ -182,13 +184,14 @@
       "member_id": "m-ashraf",
       "plan_id": "p1",
       "start_date": "2026-05-15",
-      "end_date": "2026-06-14",
+      "end_date": "2026-08-04",
       "payment_status": "paid",
       "amount_paid": 800,
-      "payment_mode": "cash",
-      "status": "expired",
+      "payment_mode": "card",
+      "status": "active",
       "created_at": "2026-07-05T00:09:00.000Z",
-      "gym_id": "g-1"
+      "gym_id": "g-1",
+      "updated_at": "2026-07-05T18:04:30.322Z"
     }
   ],
   "message_templates": [
@@ -215,6 +218,14 @@
       "is_active": true,
       "updated_at": "2026-06-29T19:32:20.516Z",
       "gym_id": "g-1"
+    },
+    {
+      "id": "t4",
+      "gym_id": "g-1",
+      "trigger_type": "payment_received",
+      "template_body": "Hi {Name}, we have received your payment for {GymName}. Your membership is now active until {ExpiryDate}. Thank you! Contact: {OwnerPhone}",
+      "is_active": true,
+      "updated_at": "2026-07-05T14:16:52.289Z"
     }
   ],
   "message_logs": [
@@ -235,6 +246,386 @@
       "trigger_type": "expired",
       "message_sent": "Hi Ashraf Ali, your FitPro Gym membership expired on 2026-06-14. We miss you! Renew anytime: 8122715213",
       "status": "sent"
+    },
+    {
+      "id": "g0z9omf8s",
+      "created_at": "2026-07-05T14:00:10.336Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "failed",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "one6gtfvs",
+      "created_at": "2026-07-05T14:00:11.382Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "failed",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "5m7x0sxc7",
+      "created_at": "2026-07-05T14:00:11.589Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "failed",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "x5k9jfcpk",
+      "created_at": "2026-07-05T14:00:11.810Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "failed",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "6snrzfth5",
+      "created_at": "2026-07-05T14:05:56.064Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "nw7qc0rx0",
+      "created_at": "2026-07-05T14:06:02.927Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "lrpkwxhhz",
+      "created_at": "2026-07-05T14:12:02.248Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "wjfxbohd4",
+      "created_at": "2026-07-05T14:12:12.908Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "za2j3dxiu",
+      "created_at": "2026-07-05T14:12:20.890Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-08-04. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "ynkjzqt27",
+      "created_at": "2026-07-05T14:12:22.253Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-08-04. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "c3fhxasch",
+      "created_at": "2026-07-05T14:21:36.748Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-30. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "6k4gyxktj",
+      "created_at": "2026-07-05T14:21:43.350Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-06-30. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "9tkj5ni59",
+      "created_at": "2026-07-05T14:21:52.133Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-08-04. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "w9u0ymnki",
+      "created_at": "2026-07-05T14:21:52.744Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "Hi Ashraf Ali, your raj membership expired on 2026-08-04. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "13ssnwqq4",
+      "created_at": "2026-07-05T14:22:05.003Z",
+      "member_id": "m-expired",
+      "membership_id": "ms-expired",
+      "trigger_type": "expired",
+      "message_sent": "Hi Bob Expired, your raj membership expired on 2026-06-29. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "y5i8sgjiu",
+      "created_at": "2026-07-05T14:22:05.009Z",
+      "member_id": "m-unpaid",
+      "membership_id": "ms-unpaid",
+      "trigger_type": "expired",
+      "message_sent": "Hi Alice Unpaid, your raj membership expired on 2026-07-24. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "as0nphc9p",
+      "created_at": "2026-07-05T14:22:13.186Z",
+      "member_id": "m-expired",
+      "membership_id": "ms-expired",
+      "trigger_type": "expired",
+      "message_sent": "Hi Bob Expired, your raj membership expired on 2026-06-29. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "k0q6cezyx",
+      "created_at": "2026-07-05T14:22:13.624Z",
+      "member_id": "m-unpaid",
+      "membership_id": "ms-unpaid",
+      "trigger_type": "expired",
+      "message_sent": "Hi Alice Unpaid, your raj membership expired on 2026-07-24. We miss you! Renew anytime: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "mj9hs6agf",
+      "created_at": "2026-07-05T14:26:42.742Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from FitPro Gym\n\nHi Ashraf Ali, we have received your payment of ₹800 via CASH. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "pzvx9u3jk",
+      "created_at": "2026-07-05T14:26:42.995Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from FitPro Gym\n\nHi Ashraf Ali, we have received your payment of ₹800 via CASH. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "4m9oq8cyj",
+      "created_at": "2026-07-05T14:36:06.114Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from FitPro Gym\n\nHi Ashraf Ali, we have received your payment of ₹800 via CASH. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "wa4abyq4w",
+      "created_at": "2026-07-05T14:36:14.023Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from FitPro Gym\n\nHi Ashraf Ali, we have received your payment of ₹800 via CASH. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "o5esqw3hj",
+      "created_at": "2026-07-05T14:39:22.495Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "yrdfopnak",
+      "created_at": "2026-07-05T14:39:23.540Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "sjwspr5i0",
+      "created_at": "2026-07-05T16:59:30.715Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "kpgnym0b2",
+      "created_at": "2026-07-05T16:59:33.139Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "vibf5g5q4",
+      "created_at": "2026-07-05T17:02:46.650Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "l7v6dcoqz",
+      "created_at": "2026-07-05T17:02:51.903Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "n2q2jvap1",
+      "created_at": "2026-07-05T17:07:34.294Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "x4i25m5jk",
+      "created_at": "2026-07-05T17:07:43.362Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "gto19m5dn",
+      "created_at": "2026-07-05T17:10:32.040Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "j7qq3xboa",
+      "created_at": "2026-07-05T17:10:32.235Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "7kw0lzvnq",
+      "created_at": "2026-07-05T17:16:53.991Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "m45y653et",
+      "created_at": "2026-07-05T17:17:03.802Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message_sent": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "ahbam6kxx",
+      "created_at": "2026-07-05T17:48:18.573Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from raj\n\nHi Ashraf Ali, we have received your payment of ₹800 via UPI. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "qwfwnp8eo",
+      "created_at": "2026-07-05T17:48:26.771Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from raj\n\nHi Ashraf Ali, we have received your payment of ₹800 via UPI. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "okr180lvz",
+      "created_at": "2026-07-05T18:04:30.541Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from raj\n\nHi Ashraf Ali, we have received your payment of ₹800 via CARD. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
+    },
+    {
+      "id": "y9up3bdu2",
+      "created_at": "2026-07-05T18:04:37.299Z",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message_sent": "✅ Payment Receipt from raj\n\nHi Ashraf Ali, we have received your payment of ₹800 via CARD. Thank you!",
+      "status": "sent",
+      "gym_id": "g-1"
     }
   ],
   "users": [
@@ -280,5 +671,239 @@
     }
   ],
   "trainers": [],
-  "attendance": []
+  "attendance": [
+    {
+      "id": "9tuk1swn7",
+      "created_at": "2026-07-05T18:24:57.786Z",
+      "entity_type": "member",
+      "entity_id": "m-ashraf",
+      "gym_id": "g-1",
+      "date": "2026-07-05",
+      "timestamp": "2026-07-05T18:24:57.780Z"
+    }
+  ],
+  "pending_messages": [
+    {
+      "id": "77kkagrei",
+      "created_at": "2026-07-05T14:05:56.062Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:06:02.925Z"
+    },
+    {
+      "id": "is0vsb0d4",
+      "created_at": "2026-07-05T14:12:02.246Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "Hi Ashraf Ali, your raj membership expired on 2026-06-14. We miss you! Renew anytime: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:12:12.903Z"
+    },
+    {
+      "id": "wg1s3bhsi",
+      "created_at": "2026-07-05T14:12:20.888Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "Hi Ashraf Ali, your raj membership expired on 2026-08-04. We miss you! Renew anytime: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:12:22.248Z"
+    },
+    {
+      "id": "dsmjwr3f5",
+      "created_at": "2026-07-05T14:21:36.743Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "Hi Ashraf Ali, your raj membership expired on 2026-06-30. We miss you! Renew anytime: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:21:43.345Z"
+    },
+    {
+      "id": "r9xb1wbxp",
+      "created_at": "2026-07-05T14:21:52.131Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "Hi Ashraf Ali, your raj membership expired on 2026-08-04. We miss you! Renew anytime: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:21:52.739Z"
+    },
+    {
+      "id": "kmez1s87s",
+      "created_at": "2026-07-05T14:22:04.995Z",
+      "gym_id": "g-1",
+      "member_id": "m-expired",
+      "membership_id": "ms-expired",
+      "trigger_type": "expired",
+      "message": "Hi Bob Expired, your raj membership expired on 2026-06-29. We miss you! Renew anytime: 08122715213",
+      "phone": "9876543212",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:22:13.184Z"
+    },
+    {
+      "id": "3g66ez9zq",
+      "created_at": "2026-07-05T14:22:05.005Z",
+      "gym_id": "g-1",
+      "member_id": "m-unpaid",
+      "membership_id": "ms-unpaid",
+      "trigger_type": "expired",
+      "message": "Hi Alice Unpaid, your raj membership expired on 2026-07-24. We miss you! Renew anytime: 08122715213",
+      "phone": "9876543213",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:22:13.621Z"
+    },
+    {
+      "id": "bywh0lew7",
+      "created_at": "2026-07-05T14:26:42.737Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "✅ Payment Receipt from FitPro Gym\n\nHi Ashraf Ali, we have received your payment of ₹800 via CASH. Thank you!",
+      "phone": "7305041971",
+      "status": "sent",
+      "updated_at": "2026-07-05T14:26:42.987Z"
+    },
+    {
+      "id": "vxq0ndqq4",
+      "created_at": "2026-07-05T14:36:06.110Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "✅ Payment Receipt from FitPro Gym\n\nHi Ashraf Ali, we have received your payment of ₹800 via CASH. Thank you!",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNDM2MDZaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzw1NzlmZjMzM2JjY2VmMmYyOWQ2NjczNjc4YzBiMWI0ND4gPDU3OWZmMzMzYmNjZWYyZjI5ZDY2NzM2NzhjMGIxYjQ0Pl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T14:36:14.021Z"
+    },
+    {
+      "id": "sm5utui6p",
+      "created_at": "2026-07-05T14:39:22.492Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNDM5MjJaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzw1NDI0MDUyNGMyYzI2ZDkxYmU0MmFlODliNzMxOTAxNz4gPDU0MjQwNTI0YzJjMjZkOTFiZTQyYWU4OWI3MzE5MDE3Pl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T14:39:23.530Z"
+    },
+    {
+      "id": "52i9v8t6q",
+      "created_at": "2026-07-05T16:59:30.681Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNjU5MjlaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzxlYjgzMGFhYzBkOTgwNjY2ZGM0ZWU5MjYwZjIwMTQ4ZT4gPGViODMwYWFjMGQ5ODA2NjZkYzRlZTkyNjBmMjAxNDhlPl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T16:59:33.122Z"
+    },
+    {
+      "id": "fwd0yskan",
+      "created_at": "2026-07-05T17:02:46.639Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNzAyNDZaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzxhMjI1NmM4ZmViZWEzZmY3OTk0NjQyOGIwZmUxMWRjMD4gPGEyMjU2YzhmZWJlYTNmZjc5OTQ2NDI4YjBmZTExZGMwPl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T17:02:51.896Z"
+    },
+    {
+      "id": "h4ksoikst",
+      "created_at": "2026-07-05T17:07:34.289Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNzA3MzRaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzwxZWJiM2RkOWE2ODIwZGVkMmMyZGYwYzhiNjBhNTViMj4gPDFlYmIzZGQ5YTY4MjBkZWQyYzJkZjBjOGI2MGE1NWIyPl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T17:07:43.359Z"
+    },
+    {
+      "id": "5cpnrxyn9",
+      "created_at": "2026-07-05T17:10:32.037Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNzEwMzJaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzw4MmUzYzIwYzlhMTIxYWRjMjFmMjYwOWZkOWNjNDM2ND4gPDgyZTNjMjBjOWExMjFhZGMyMWYyNjA5ZmQ5Y2M0MzY0Pl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T17:10:32.231Z"
+    },
+    {
+      "id": "dhs2lkucl",
+      "created_at": "2026-07-05T17:16:53.986Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "payment_received",
+      "message": "Hi Ashraf Ali, we have received your payment for raj. Your membership is now active until 2026-08-04. Thank you! Contact: 08122715213",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCEw8Kkommo+ELEtHlv/DkUqnHTlZrrUfNTAZG8hVUt99KmlbDcq4c64WbZ+QtsjcmvW/jC+uk7VnCHua0D40eSsoeXh/yfwXr6FvNf+FUtQy5r/UbNhZST07eee3jKk0wDUz+mSM7g3I7o4ZXTx7730SL955YpwkzKYuqAnJc4CliNkQGQQtFjkCpre7nefmlpAxYbIabIefn4AdALZefOslaRKmGZy/jQ5fXgplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNzE2NTNaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzwxYzc0NWU2NzBiOGYwZmY5YWZlNzI1NTE4OTBhNTE3Nj4gPDFjNzQ1ZTY3MGI4ZjBmZjlhZmU3MjU1MTg5MGE1MTc2Pl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T17:17:03.799Z"
+    },
+    {
+      "id": "q4j4exij7",
+      "created_at": "2026-07-05T17:48:18.569Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "✅ Payment Receipt from raj\n\nHi Ashraf Ali, we have received your payment of ₹800 via UPI. Thank you!",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "JVBERi0xLjMKJf////8KNyAwIG9iago8PAovVHlwZSAvUGFnZQovUGFyZW50IDEgMCBSCi9NZWRpYUJveCBbMCAwIDU5NS4yOCA4NDEuODldCi9Db250ZW50cyA1IDAgUgovUmVzb3VyY2VzIDYgMCBSCi9Vc2VyVW5pdCAxCj4+CmVuZG9iago2IDAgb2JqCjw8Ci9Qcm9jU2V0IFsvUERGIC9UZXh0IC9JbWFnZUIgL0ltYWdlQyAvSW1hZ2VJXQovRm9udCA8PAovRjIgOCAwIFIKL0YxIDkgMCBSCi9GMyAxMCAwIFIKPj4KL0NvbG9yU3BhY2UgPDwKPj4KPj4KZW5kb2JqCjUgMCBvYmoKPDwKL0xlbmd0aCA2NTcKL0ZpbHRlciAvRmxhdGVEZWNvZGUKPj4Kc3RyZWFtCnic3VZNa9tAEL3vr5g/0M187y4YHZJ+QA+FNr6FHhxZgkJTaAPt3y8ry44km8Q5pakMNpoV9nvz5s0zAQLCGwKErBRzgfYu1JIVi5yBEOFXFy7edr+/td2XD5fQ3geMRMk1oeXMYlyUACM5pqxCkti0IANGPtxRqacG9+2P0C++jqC+6snPQKfwXK7HOgG7R1dI2WPKDuu7cPGegTOs+8CwbsPNylhJNw3gV1h/DO/W4fMR/AnwkQhgxD3KkYMNnGYsKZ0Jk4pFlYKo4JZiJj1A5Qr1ZmXYDM1dKTVAhLCyols17UwZjdVU1LQYmj7KRQqTeXZOalgyCmDUh5YPZACjjaf7p8/tt+VoGREJnDi6jEQIaCSi6pTUTTYNGMKKURL3YtwLCwqLz+AbAjtHNgcdRywPI0bwZ8rt6jpgzBNaFThgLDMWSWtJZ+MocH31KVwfNYqn00nFAaMsrtq6xWifKzgimFFEynulDw2qqm6V1YwZtVOqFXnhCZUl4ImilMRz4jqgsHJyZ1Ty1stSScE0KHkXTAct94Xvr11K9JNSVul625v0wcJaVJ9SdM7fC2Cc7sZKqPp0ofxz5ESPlvkAWsdNw0m4a0B35syCgkdCGi+EHAuvXUj1k558fPtWkVX/DY/OCDx41MxQj/1Yln4s/4cflU77cbJaTTTXuGRsIFdBffeppG21J+POt1q0fULYInNj1n8yvrhO1p4h62lC+8jkraDk4f0l01+8Rr7V9BdKUcuY/lKTYTeH6tnJO79lTKUBronRJ2N0b0B2d8zo4tl775N48c4T4yRfNnU9TUieAyxFzIbIIGixyBEwvd1tPDe3hIwJk9VYO/z8BOwAsPXiWy9JkzDN4PwF7RRe+gplbmRzdHJlYW0KZW5kb2JqCjEyIDAgb2JqCihQREZLaXQpCmVuZG9iagoxMyAwIG9iagooUERGS2l0KQplbmRvYmoKMTQgMCBvYmoKKEQ6MjAyNjA3MDUxNzQ4MThaKQplbmRvYmoKMTEgMCBvYmoKPDwKL1Byb2R1Y2VyIDEyIDAgUgovQ3JlYXRvciAxMyAwIFIKL0NyZWF0aW9uRGF0ZSAxNCAwIFIKPj4KZW5kb2JqCjkgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iago4IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQKL1N1YnR5cGUgL1R5cGUxCi9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nCj4+CmVuZG9iagoxMCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1PYmxpcXVlCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKNCAwIG9iago8PAo+PgplbmRvYmoKMyAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL05hbWVzIDIgMCBSCj4+CmVuZG9iagoxIDAgb2JqCjw8Ci9UeXBlIC9QYWdlcwovQ291bnQgMQovS2lkcyBbNyAwIFJdCj4+CmVuZG9iagoyIDAgb2JqCjw8Ci9EZXN0cyA8PAogIC9OYW1lcyBbCl0KPj4KPj4KZW5kb2JqCnhyZWYKMCAxNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDE1NDQgMDAwMDAgbiAKMDAwMDAwMTYwMSAwMDAwMCBuIAowMDAwMDAxNDgyIDAwMDAwIG4gCjAwMDAwMDE0NjEgMDAwMDAgbiAKMDAwMDAwMDI2NSAwMDAwMCBuIAowMDAwMDAwMTM3IDAwMDAwIG4gCjAwMDAwMDAwMTUgMDAwMDAgbiAKMDAwMDAwMTI1MyAwMDAwMCBuIAowMDAwMDAxMTU2IDAwMDAwIG4gCjAwMDAwMDEzNTUgMDAwMDAgbiAKMDAwMDAwMTA4MCAwMDAwMCBuIAowMDAwMDAwOTk0IDAwMDAwIG4gCjAwMDAwMDEwMTkgMDAwMDAgbiAKMDAwMDAwMTA0NCAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDE1Ci9Sb290IDMgMCBSCi9JbmZvIDExIDAgUgovSUQgWzwzY2U2YWQ4ZDI5YmZmNmQ4M2YwMzcwNWJjZWQyMjZiND4gPDNjZTZhZDhkMjliZmY2ZDgzZjAzNzA1YmNlZDIyNmI0Pl0KPj4Kc3RhcnR4cmVmCjE2NDgKJSVFT0YK",
+      "media_name": "Invoice.pdf",
+      "updated_at": "2026-07-05T17:48:26.767Z"
+    },
+    {
+      "id": "xx33ih84j",
+      "created_at": "2026-07-05T18:04:30.538Z",
+      "gym_id": "g-1",
+      "member_id": "m-ashraf",
+      "membership_id": "ms-ashraf",
+      "trigger_type": "expired",
+      "message": "✅ Payment Receipt from raj\n\nHi Ashraf Ali, we have received your payment of ₹800 via CARD. Thank you!",
+      "phone": "7305041971",
+      "status": "sent",
+      "media_base64": "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MTMgMCBvYmoKKFBERktpdCkKZW5kb2JqCjE0IDAgb2JqCihEOjIwMjYwNzA1MTgwNDMwWikKZW5kb2JqCjExIDAgb2JqCjw8Ci9Qcm9kdWNlciAxMiAwIFIKL0NyZWF0b3IgMTMgMCBSCi9DcmVhdGlvbkRhdGUgMTQgMCBSCj4+CmVuZG9iago5IDAgb2JqCjw8Ci9UeXBlIC9Gb250Ci9CYXNlRm9udCAvSGVsdmV0aWNhCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKOCAwIG9iago8PAovVHlwZSAvRm9udAovQmFzZUZvbnQgL0hlbHZldGljYS1Cb2xkCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL1R5cGUgL0ZvbnQKL0Jhc2VGb250IC9IZWx2ZXRpY2EtT2JsaXF1ZQovU3VidHlwZSAvVHlwZTEKL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcKPj4KZW5kb2JqCjQgMCBvYmoKPDwKPj4KZW5kb2JqCjMgMCBvYmoKPDwKL1R5cGUgL0NhdGFsb2cKL1BhZ2VzIDEgMCBSCi9OYW1lcyAyIDAgUgo+PgplbmRvYmoKMSAwIG9iago8PAovVHlwZSAvUGFnZXMKL0NvdW50IDEKL0tpZHMgWzcgMCBSXQo+PgplbmRvYmoKMiAwIG9iago8PAovRGVzdHMgPDwKICAvTmFtZXMgWwpdCj4+Cj4+CmVuZG9iagp4cmVmCjAgMTUKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAyMzI1IDAwMDAwIG4gCjAwMDAwMDIzODIgMDAwMDAgbiAKMDAwMDAwMjI2MyAwMDAwMCBuIAowMDAwMDAyMjQyIDAwMDAwIG4gCjAwMDAwMDAyNjUgMDAwMDAgbiAKMDAwMDAwMDEzNyAwMDAwMCBuIAowMDAwMDAwMDE1IDAwMDAwIG4gCjAwMDAwMDIwMzQgMDAwMDAgbiAKMDAwMDAwMTkzNyAwMDAwMCBuIAowMDAwMDAyMTM2IDAwMDAwIG4gCjAwMDAwMDE4NjEgMDAwMDAgbiAKMDAwMDAwMTc3NSAwMDAwMCBuIAowMDAwMDAxODAwIDAwMDAwIG4gCjAwMDAwMDE4MjUgMDAwMDAgbiAKdHJhaWxlcgo8PAovU2l6ZSAxNQovUm9vdCAzIDAgUgovSW5mbyAxMSAwIFIKL0lEIFs8MDIxN2I5ZjZjZWYyNDFjYjI4ZWM4NWM3NDgwMWNhOTg+IDwwMjE3YjlmNmNlZjI0MWNiMjhlYzg1Yzc0ODAxY2E5OD5dCj4+CnN0YXJ0eHJlZgoyNDI5CiUlRU9GCg==",
+      "media_name": "GymOS_Receipt.pdf",
+      "updated_at": "2026-07-05T18:04:37.293Z"
+    }
+  ]
 }

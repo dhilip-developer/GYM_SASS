@@ -138,7 +138,7 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
     // 4. Fetch latest membership for ExpiryDate
     const { data: memberships, error: membershipError } = await supabase
       .from('memberships')
-      .select('id, end_date')
+      .select('id, end_date, start_date, amount_paid, payment_mode, plan_id, plans(*)')
       .eq('member_id', member_id)
       .eq('gym_id', req.gymId)
       .order('end_date', { ascending: false });
@@ -165,14 +165,23 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
         let media_name = null;
         
         if (generate_receipt_pdf && receipt_details) {
+          const planName = latestMembership && latestMembership.plans
+            ? latestMembership.plans.name
+            : (receipt_details.planName || 'Gym Membership');
+
           media_base64 = await generateReceiptPDF({
             gymName: settings.gym_name,
+            gymAddress: settings.address || '',
+            gymPhone: settings.phone || '',
             memberName: member.full_name,
-            amountPaid: receipt_details.amount,
-            paymentMode: receipt_details.method,
+            memberPhone: member.phone || '',
+            planName: planName,
+            amountPaid: receipt_details.amount || latestMembership?.amount_paid || 0,
+            paymentMode: receipt_details.method || latestMembership?.payment_mode || 'CASH',
+            startDate: latestMembership ? latestMembership.start_date : '',
             expiryDate: expiryDate
           });
-          media_name = 'Invoice.pdf';
+          media_name = 'GymOS_Receipt.pdf';
         }
 
         // Queue to Local Agent via pending_messages table

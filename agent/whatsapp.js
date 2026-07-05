@@ -158,23 +158,31 @@ class WhatsAppSession {
     }
 
     const jid = `${cleanPhone}@s.whatsapp.net`;
+    const logPath = require('path').join(__dirname, 'log.txt');
     console.log(`[WHATSAPP SENDER ${this.sessionId}] Sending to ${jid}: "${text}" ${media ? 'with document' : ''}`);
+    require('fs').appendFileSync(logPath, `Sending to ${jid}: "${text}" with media=${!!media}\n`);
     
     try {
       let response;
       if (media && media.base64) {
+        require('fs').appendFileSync(logPath, `Media has base64. Length: ${media.base64.length}\n`);
         const buffer = Buffer.from(media.base64, 'base64');
+        require('fs').appendFileSync(logPath, `Buffer created. Length: ${buffer.length}\n`);
+        
         response = await this.sock.sendMessage(jid, { 
           document: buffer, 
           mimetype: media.mimetype || 'application/pdf', 
           fileName: media.fileName || 'Document.pdf',
           caption: text 
         });
+        require('fs').appendFileSync(logPath, `Message sent. Response ID: ${response?.key?.id}\n`);
       } else {
+        require('fs').appendFileSync(logPath, `No media, sending as text.\n`);
         response = await this.sock.sendMessage(jid, { text: text });
       }
       return { success: true, messageId: response.key.id };
     } catch (err) {
+      require('fs').appendFileSync(logPath, `ERROR: ${err.message}\n${err.stack}\n`);
       console.error(`[WHATSAPP SENDER ERROR ${this.sessionId}] Failed to send message:`, err);
       throw err;
     }

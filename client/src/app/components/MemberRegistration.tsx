@@ -393,16 +393,20 @@ export function MemberRegistration() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
                 <div className="space-y-1.5">
-                  <Label htmlFor="amount_paid" className="text-slate-700 font-semibold text-xs">Amount Paid</Label>
-                  <Input
-                    id="amount_paid"
-                    type="number"
-                    min="0"
-                    value={form.amount_paid}
-                    onChange={(e) => handleChange('amount_paid', e.target.value)}
-                    placeholder="₹0"
-                    className="rounded-xl h-11 border-slate-200 focus:border-red-500 focus:ring-red-500"
-                  />
+                  <Label htmlFor="amount_paid" className="text-slate-700 font-semibold text-xs">Amount Paid <span className="text-slate-400 font-normal">(editable per customer)</span></Label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 font-bold text-sm">₹</span>
+                    <Input
+                      id="amount_paid"
+                      type="number"
+                      min="0"
+                      value={form.amount_paid}
+                      onChange={(e) => handleChange('amount_paid', e.target.value)}
+                      placeholder="0"
+                      className="rounded-xl h-11 border-slate-200 focus:border-red-500 focus:ring-red-500 pl-7 font-bold text-slate-800"
+                    />
+                  </div>
+                  <p className="text-[11px] text-slate-400">Auto-filled from plan price. You can change this for a specific discount or custom deal.</p>
                 </div>
 
                 {/* Address / Notes */}

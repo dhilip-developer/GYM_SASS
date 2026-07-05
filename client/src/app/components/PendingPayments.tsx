@@ -39,15 +39,18 @@ export function PendingPayments() {
   const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
   const [gymSettings, setGymSettings] = useState<any>(null);
   const [templates, setTemplates] = useState<any[]>([]);
+  const [plans, setPlans] = useState<any[]>([]);
+  const [selectedPlanId, setSelectedPlanId] = useState('');
 
   const fetchUnpaidData = async () => {
     setIsLoading(true);
     try {
-      const [membersRes, statsRes, settingsRes, templatesRes] = await Promise.all([
+      const [membersRes, statsRes, settingsRes, templatesRes, plansRes] = await Promise.all([
         axiosInstance.get('/api/members'),
         axiosInstance.get('/api/memberships/stats'),
         axiosInstance.get('/api/settings'),
-        axiosInstance.get('/api/messages/templates')
+        axiosInstance.get('/api/messages/templates'),
+        axiosInstance.get('/api/plans')
       ]);
 
       let allMembers = membersRes.data?.members || [];
@@ -77,6 +80,9 @@ export function PendingPayments() {
       if (templatesRes.data) {
         setTemplates(templatesRes.data);
       }
+      if (plansRes.data?.plans) {
+        setPlans(plansRes.data.plans.filter((p: any) => p.is_active !== false));
+      }
 
     } catch (error) {
       console.error('Error fetching unpaid payments details:', error);
@@ -98,6 +104,8 @@ export function PendingPayments() {
     }
     setSelectedMembership(m);
     setSelectedMemberName(member.full_name);
+    const defaultPlanId = m.plan_id || m.plans?.id || '';
+    setSelectedPlanId(defaultPlanId);
     setAmountPaid(m.plans?.price ? m.plans.price.toString() : '');
     setPaymentMode('cash');
     setIsMarkPaidOpen(true);
@@ -482,17 +490,46 @@ export function PendingPayments() {
                 <span className="text-sm font-extrabold text-slate-800">{selectedMemberName}</span>
               </div>
 
+              {/* Plan Selector */}
+              {plans.length > 0 && (
+                <div className="space-y-1.5">
+                  <Label htmlFor="pay-plan" className="text-slate-700 font-semibold text-xs">Plan</Label>
+                  <select
+                    id="pay-plan"
+                    value={selectedPlanId}
+                    onChange={(e) => {
+                      const planId = e.target.value;
+                      setSelectedPlanId(planId);
+                      const plan = plans.find((p: any) => p.id === planId);
+                      if (plan) setAmountPaid(plan.price.toString());
+                    }}
+                    className="w-full h-10 rounded-xl border border-slate-200 px-3 text-sm font-semibold text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  >
+                    <option value="">— Select Plan —</option>
+                    {plans.map((plan: any) => (
+                      <option key={plan.id} value={plan.id}>
+                        {plan.name} — ₹{Number(plan.price).toLocaleString('en-IN')} ({plan.duration_days} days)
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
               {/* Amount */}
               <div className="space-y-1.5">
-                <Label htmlFor="pay-amount" className="text-slate-700 font-semibold text-xs">Amount Received *</Label>
-                <Input
-                  id="pay-amount"
-                  type="number"
-                  required
-                  value={amountPaid}
-                  onChange={(e) => setAmountPaid(e.target.value)}
-                  className="rounded-xl border-slate-200 focus:border-red-500 focus:ring-red-500 h-10"
-                />
+                <Label htmlFor="pay-amount" className="text-slate-700 font-semibold text-xs">Amount Received * <span className="text-slate-400 font-normal">(editable)</span></Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">₹</span>
+                  <Input
+                    id="pay-amount"
+                    type="number"
+                    required
+                    value={amountPaid}
+                    onChange={(e) => setAmountPaid(e.target.value)}
+                    className="rounded-xl border-slate-200 focus:border-red-500 focus:ring-red-500 h-10 pl-7 font-bold text-slate-800"
+                  />
+                </div>
+                <p className="text-[10px] text-slate-400">Auto-filled from plan price. You can override for this customer.</p>
               </div>
 
               {/* Payment Mode */}
