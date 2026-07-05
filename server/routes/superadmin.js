@@ -108,8 +108,6 @@ router.post('/gyms', authMiddleware, superAdminOnly, async (req, res) => {
 // POST /api/superadmin/invoice/:gymId
 router.post('/invoice/:gymId', authMiddleware, superAdminOnly, async (req, res) => {
   const { gymId } = req.params;
-  const whatsappManager = require('../utils/whatsapp');
-
   try {
     const { data: gym } = await supabase.from('gyms').select('*').eq('id', gymId).single();
     if (!gym) return res.status(404).json({ error: 'Gym not found' });
@@ -124,13 +122,17 @@ router.post('/invoice/:gymId', authMiddleware, superAdminOnly, async (req, res) 
 
     const message = `*GymOS Invoice*\n\nHello ${owner.full_name},\nThis is a reminder that your GymOS subscription for *${gym.name}* is due on *${gym.billing_date}*.\n\nPlease complete your payment to continue enjoying uninterrupted services.\n\nThank you for choosing GymOS!`;
 
-    const session = whatsappManager.getSession('super_admin');
-    
-    if (session.getStatus().status !== 'connected') {
-      return res.status(400).json({ error: 'Super Admin WhatsApp session is not connected' });
-    }
+    // Queue to Local Agent via pending_messages table
+    const { error: insertError } = await supabase
+      .from('pending_messages')
+      .insert({
+        gym_id: 'super_admin',
+        phone: phone,
+        message: message,
+        status: 'pending'
+      });
 
-    await session.sendMessage(phone, message);
+    if (insertError) throw insertError;
 
     return res.json({ message: 'Invoice sent successfully' });
   } catch (err) {

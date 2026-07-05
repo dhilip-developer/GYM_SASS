@@ -7,7 +7,6 @@ const membersRoutes = require('./routes/members');
 const membershipsRoutes = require('./routes/memberships');
 const messagesRoutes = require('./routes/messages');
 const settingsRoutes = require('./routes/settings');
-const whatsappRoutes = require('./routes/whatsapp');
 const leadsRoutes = require('./routes/leads');
 const announcementsRoutes = require('./routes/announcements');
 const superadminRoutes = require('./routes/superadmin');
@@ -17,7 +16,6 @@ const attendanceRoutes = require('./routes/attendance');
 const revenueRoutes = require('./routes/revenue');
 const sheetsRoutes = require('./routes/sheets');
 const { initScheduler } = require('./scheduler/cron');
-const whatsappManager = require('./utils/whatsapp');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,7 +30,6 @@ app.use('/api/members', membersRoutes);
 app.use('/api/memberships', membershipsRoutes);
 app.use('/api/messages', messagesRoutes);
 app.use('/api/settings', settingsRoutes);
-app.use('/api/whatsapp', whatsappRoutes);
 app.use('/api/leads', leadsRoutes);
 app.use('/api/announcements', announcementsRoutes);
 app.use('/api/superadmin', superadminRoutes);
@@ -55,10 +52,9 @@ app.listen(PORT, () => {
   console.log(`[SERVER] GymOS server listening on port ${PORT}`);
 });
 
-// Clean shutdown for WhatsApp client
+// Clean shutdown
 process.on('SIGTERM', async () => {
-  console.log('[SERVER] SIGTERM received. Closing WhatsApp sockets...');
-  await whatsappManager.closeAll();
+  console.log('[SERVER] SIGTERM received. Shutting down gracefully...');
   process.exit(0);
 });
 process.on('SIGINT', async () => {

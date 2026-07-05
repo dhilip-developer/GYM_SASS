@@ -3,7 +3,6 @@ const router = express.Router();
 const axios = require('axios');
 const { supabase } = require('../config/supabase');
 const authMiddleware = require('../middleware/authMiddleware');
-const whatsappManager = require('../utils/whatsapp');
 
 const { getTodayStr, addDays, formatMessage } = require('../utils/sms'); // still used for formatting/dates
 
@@ -160,14 +159,21 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
     let sendResult = { success: false, error: 'Unknown routing' };
 
     if (mode === 'server_session' || send_mode === 'whatsapp') {
-      const session = whatsappManager.getSession(req.gymId);
-      if (session.getStatus().status !== 'connected') {
-        return res.status(400).json({ 
-          error: 'WhatsApp session is not connected. Please go to the WhatsApp tab to link your device.' 
-        });
-      }
       try {
-        await session.sendMessage(member.phone, formattedMessage);
+        // Queue to Local Agent via pending_messages table
+        const { error: insertError } = await supabase
+          .from('pending_messages')
+          .insert({
+            gym_id: req.gymId,
+            member_id: member.id,
+            membership_id: latestMembership ? latestMembership.id : null,
+            trigger_type: trigger_type,
+            message: formattedMessage,
+            phone: member.phone,
+            status: 'pending'
+          });
+
+        if (insertError) throw insertError;
         sendResult = { success: true };
       } catch (err) {
         sendResult = { success: false, error: err.message };
@@ -241,11 +247,10 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
     };
 
     const mode = settings.whatsapp_mode || 'redirect';
-    const session = whatsappManager.getSession(req.gymId);
     
-    if (mode !== 'server_session' || session.getStatus().status !== 'connected') {
+    if (mode !== 'server_session') {
       return res.status(400).json({ 
-        error: 'Automated background campaigns require the WhatsApp Server Session to be connected. Please link your device in the WhatsApp tab and switch your mode to Session.' 
+        error: 'Automated background campaigns require the WhatsApp Server Session mode to be enabled in Settings.' 
       });
     }
 
@@ -298,7 +303,20 @@ router.post('/bulk-send', authMiddleware, async (req, res) => {
 
       let sendResult = { success: false };
       try {
-        await session.sendMessage(member.phone, formattedMessage);
+        // Queue to Local Agent via pending_messages table
+        const { error: insertError } = await supabase
+          .from('pending_messages')
+          .insert({
+            gym_id: req.gymId,
+            member_id: member.id,
+            membership_id: membership.id,
+            trigger_type: trigger_type,
+            message: formattedMessage,
+            phone: member.phone,
+            status: 'pending'
+          });
+
+        if (insertError) throw insertError;
         sendResult = { success: true };
       } catch (err) {
         sendResult = { success: false, error: err.message };
