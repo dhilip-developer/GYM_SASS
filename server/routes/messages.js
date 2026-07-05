@@ -4,7 +4,8 @@ const axios = require('axios');
 const { supabase } = require('../config/supabase');
 const authMiddleware = require('../middleware/authMiddleware');
 
-const { getTodayStr, addDays, formatMessage } = require('../utils/sms'); // still used for formatting/dates
+const { getTodayStr, addDays, formatMessage } = require('../utils/sms');
+const { generateReceiptPDF } = require('../utils/pdfGenerator');
 
 // GET /api/messages/templates (protected)
 router.get('/templates', authMiddleware, async (req, res) => {
@@ -90,7 +91,7 @@ router.get('/logs', authMiddleware, async (req, res) => {
 // POST /api/messages/send-manual (protected)
 // Body: { member_id, trigger_type }
 router.post('/send-manual', authMiddleware, async (req, res) => {
-  const { member_id, trigger_type, send_mode, override_message } = req.body;
+  const { member_id, trigger_type, send_mode, override_message, generate_receipt_pdf, receipt_details } = req.body;
 
   if (!member_id || !trigger_type) {
     return res.status(400).json({ error: 'Member ID and trigger type are required' });
@@ -160,6 +161,20 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
 
     if (mode === 'server_session' || send_mode === 'whatsapp') {
       try {
+        let media_base64 = null;
+        let media_name = null;
+        
+        if (generate_receipt_pdf && receipt_details) {
+          media_base64 = await generateReceiptPDF({
+            gymName: settings.gym_name,
+            memberName: member.full_name,
+            amountPaid: receipt_details.amount,
+            paymentMode: receipt_details.method,
+            expiryDate: expiryDate
+          });
+          media_name = 'Invoice.pdf';
+        }
+
         // Queue to Local Agent via pending_messages table
         const { error: insertError } = await supabase
           .from('pending_messages')
@@ -170,7 +185,9 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
             trigger_type: trigger_type,
             message: formattedMessage,
             phone: member.phone,
-            status: 'pending'
+            status: 'pending',
+            media_base64: media_base64,
+            media_name: media_name
           });
 
         if (insertError) throw insertError;

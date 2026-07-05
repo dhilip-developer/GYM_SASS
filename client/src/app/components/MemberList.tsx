@@ -178,11 +178,19 @@ export function MemberList() {
       } else {
         const toastId = toast.loading('Sending via server WhatsApp...');
         try {
-          await axiosInstance.post('/api/messages/send-manual', {
+          const payload: any = {
             member_id: member.id,
             trigger_type: triggerType,
             send_mode: 'server_session'
-          });
+          };
+          if (triggerType === 'payment_received' && member.latest_membership) {
+            payload.generate_receipt_pdf = true;
+            payload.receipt_details = {
+              amount: member.latest_membership.amount_paid || 0,
+              method: member.latest_membership.payment_mode || 'cash'
+            };
+          }
+          await axiosInstance.post('/api/messages/send-manual', payload);
           toast.dismiss(toastId);
           toast.success(`Reminder sent via WhatsApp server to ${member.full_name}`);
         } catch (error: any) {

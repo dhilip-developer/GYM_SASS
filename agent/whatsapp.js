@@ -147,7 +147,7 @@ class WhatsAppSession {
     }
   }
 
-  async sendMessage(phone, text) {
+  async sendMessage(phone, text, media = null) {
     if (this.connectionState !== 'connected' || !this.sock) {
       throw new Error(`WhatsApp session ${this.sessionId} is not connected`);
     }
@@ -158,10 +158,21 @@ class WhatsAppSession {
     }
 
     const jid = `${cleanPhone}@s.whatsapp.net`;
-    console.log(`[WHATSAPP SENDER ${this.sessionId}] Sending to ${jid}: "${text}"`);
+    console.log(`[WHATSAPP SENDER ${this.sessionId}] Sending to ${jid}: "${text}" ${media ? 'with document' : ''}`);
     
     try {
-      const response = await this.sock.sendMessage(jid, { text: text });
+      let response;
+      if (media && media.base64) {
+        const buffer = Buffer.from(media.base64, 'base64');
+        response = await this.sock.sendMessage(jid, { 
+          document: buffer, 
+          mimetype: media.mimetype || 'application/pdf', 
+          fileName: media.fileName || 'Document.pdf',
+          caption: text 
+        });
+      } else {
+        response = await this.sock.sendMessage(jid, { text: text });
+      }
       return { success: true, messageId: response.key.id };
     } catch (err) {
       console.error(`[WHATSAPP SENDER ERROR ${this.sessionId}] Failed to send message:`, err);

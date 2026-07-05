@@ -127,7 +127,12 @@ export function PendingPayments() {
           member_id: selectedMembership.member_id,
           trigger_type: 'expired',
           send_mode: 'server_session',
-          override_message: msg
+          override_message: msg,
+          generate_receipt_pdf: true,
+          receipt_details: {
+            amount: amountPaid,
+            method: paymentMode
+          }
         }).catch(e => console.log('Silent fail sending receipt'));
       } else {
         // Find member phone from full list

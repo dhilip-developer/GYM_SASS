@@ -103,8 +103,16 @@ const startPollingEngine = () => {
           for (const msg of pendingMessages) {
             try {
               // 2. Send the message locally
-              await session.sendMessage(msg.phone, msg.message);
-              console.log(`[AGENT] Sent message to ${msg.phone}`);
+              let media = null;
+              if (msg.media_base64) {
+                media = {
+                  base64: msg.media_base64,
+                  fileName: msg.media_name || 'Document.pdf',
+                  mimetype: 'application/pdf'
+                };
+              }
+              await session.sendMessage(msg.phone, msg.message, media);
+              console.log(`[AGENT] Sent message to ${msg.phone} ${media ? 'with media' : ''}`);
               
               // 3. Mark as complete in the cloud
               await axios.post(`${CLOUD_URL}/api/messages/complete`, {
