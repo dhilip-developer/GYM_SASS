@@ -97,6 +97,14 @@ if (isConfigured) {
         template_body: 'Hi {Name}, your {GymName} membership expired on {ExpiryDate}. We miss you! Renew anytime: {OwnerPhone}',
         is_active: true,
         updated_at: new Date().toISOString()
+      },
+      {
+        id: 't4',
+        gym_id: 'g-1',
+        trigger_type: 'payment_received',
+        template_body: 'Hi {Name}, we have received your payment for {GymName}. Your membership is now active until {ExpiryDate}. Thank you! Contact: {OwnerPhone}',
+        is_active: true,
+        updated_at: new Date().toISOString()
       }
     ],
     message_logs: [],

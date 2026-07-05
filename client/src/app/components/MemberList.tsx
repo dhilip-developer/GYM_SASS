@@ -126,6 +126,9 @@ export function MemberList() {
     if (status === 'expired') {
       return 'expired';
     }
+    if (status === 'active') {
+      return 'payment_received';
+    }
     if (status === 'expiring') {
       const endDateStr = member.latest_membership?.end_date;
       if (endDateStr) {
