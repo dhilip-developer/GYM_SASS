@@ -90,7 +90,7 @@ router.get('/logs', authMiddleware, async (req, res) => {
 // POST /api/messages/send-manual (protected)
 // Body: { member_id, trigger_type }
 router.post('/send-manual', authMiddleware, async (req, res) => {
-  const { member_id, trigger_type, send_mode } = req.body;
+  const { member_id, trigger_type, send_mode, override_message } = req.body;
 
   if (!member_id || !trigger_type) {
     return res.status(400).json({ error: 'Member ID and trigger type are required' });
@@ -147,8 +147,8 @@ router.post('/send-manual', authMiddleware, async (req, res) => {
     const latestMembership = (memberships && memberships.length > 0) ? memberships[0] : null;
     const expiryDate = latestMembership ? latestMembership.end_date : 'N/A';
 
-    // 5. Replace placeholders
-    const formattedMessage = formatMessage(template.template_body, {
+    // 5. Replace placeholders if not using override
+    const formattedMessage = override_message ? override_message : formatMessage(template.template_body, {
       name: member.full_name,
       expiryDate,
       gymName: settings.gym_name,
