@@ -13,8 +13,18 @@ import {
   CreditCard,
   Bell,
   Cake,
-  Send
+  Send,
+  IndianRupee
 } from 'lucide-react';
+import { 
+  AreaChart, 
+  Area, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer 
+} from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
 import { Button } from './ui/button';
 import { toast } from 'sonner';
@@ -26,7 +36,9 @@ export function Dashboard() {
     active: 0,
     expired: 0,
     expiring_soon: 0,
-    unpaid: 0
+    unpaid: 0,
+    revenue_this_month: 0,
+    revenue_trend: []
   });
   const [recentAlerts, setRecentAlerts] = useState<any[]>([]);
   const [recentMembers, setRecentMembers] = useState<any[]>([]);
@@ -161,7 +173,7 @@ export function Dashboard() {
       </div>
 
       {/* Metric Cards Row */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-5">
         {/* Total Members */}
         <Card className="bg-white border border-slate-100 shadow-sm rounded-2xl transition-all duration-300 hover:shadow-md">
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
@@ -217,7 +229,75 @@ export function Dashboard() {
             <p className="text-xs text-slate-400 font-semibold mt-1">Expires within 3 days</p>
           </CardContent>
         </Card>
+
+        {/* Monthly Revenue */}
+        <Card className="bg-white border border-slate-100 shadow-sm rounded-2xl transition-all duration-300 hover:shadow-md">
+          <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
+            <CardTitle className="text-xs font-bold text-slate-500 uppercase tracking-wider">Revenue</CardTitle>
+            <div className="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center text-green-600">
+              <IndianRupee className="w-4 h-4" />
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="text-3xl font-extrabold text-slate-800">₹{(stats.revenue_this_month || 0).toLocaleString('en-IN')}</div>
+            <p className="text-xs text-slate-400 font-semibold mt-1">Collected this month</p>
+          </CardContent>
+        </Card>
       </div>
+
+      {/* Analytics Chart Row */}
+      {stats.revenue_trend && stats.revenue_trend.length > 0 && (
+        <Card className="bg-white border border-slate-100 shadow-sm rounded-2xl overflow-hidden">
+          <CardHeader className="border-b border-slate-50 pb-4">
+            <CardTitle className="text-lg font-bold text-slate-800 flex items-center gap-2">
+              <TrendingUp className="w-5 h-5 text-red-500" />
+              Revenue Over Time
+            </CardTitle>
+            <CardDescription className="text-xs text-slate-400 font-medium">Last 6 months revenue performance</CardDescription>
+          </CardHeader>
+          <CardContent className="p-6 pt-8">
+            <div className="h-[280px] w-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={stats.revenue_trend} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                  <XAxis 
+                    dataKey="month" 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
+                    dy={10}
+                  />
+                  <YAxis 
+                    axisLine={false} 
+                    tickLine={false} 
+                    tick={{ fill: '#94a3b8', fontSize: 12, fontWeight: 600 }}
+                    tickFormatter={(value) => `₹${value >= 1000 ? (value / 1000) + 'k' : value}`}
+                  />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
+                    itemStyle={{ color: '#0f172a', fontWeight: 'bold' }}
+                    formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, 'Revenue']}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="revenue" 
+                    stroke="#ef4444" 
+                    strokeWidth={3}
+                    fillOpacity={1} 
+                    fill="url(#colorRevenue)" 
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* 🎂 Birthday Reminders */}
       {birthdays.length > 0 && (

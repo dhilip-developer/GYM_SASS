@@ -87,13 +87,32 @@ router.get('/stats', authMiddleware, async (req, res) => {
     const currentMonth = new Date().getMonth();
     const currentYear = new Date().getFullYear();
 
+    // Setup array for last 6 months of revenue
+    const revenue_trend = [];
+    for (let i = 5; i >= 0; i--) {
+      const d = new Date(currentYear, currentMonth - i, 1);
+      revenue_trend.push({
+        month: d.toLocaleString('default', { month: 'short' }),
+        year: d.getFullYear(),
+        monthIndex: d.getMonth(),
+        revenue: 0
+      });
+    }
+
     if (allMemberships) {
       allMemberships.forEach(m => {
         if (m.payment_status === 'paid' && m.amount_paid) {
           // If updated_at exists, use it, else fallback to today
           const d = m.updated_at ? new Date(m.updated_at) : new Date();
+          
           if (d.getMonth() === currentMonth && d.getFullYear() === currentYear) {
             revenue_this_month += (m.amount_paid || 0);
+          }
+
+          // Add to revenue trend if it falls within the last 6 months
+          const trendItem = revenue_trend.find(t => t.monthIndex === d.getMonth() && t.year === d.getFullYear());
+          if (trendItem) {
+            trendItem.revenue += (m.amount_paid || 0);
           }
         }
       });
@@ -105,7 +124,8 @@ router.get('/stats', authMiddleware, async (req, res) => {
       expired,
       expiring_soon,
       unpaid,
-      revenue_this_month
+      revenue_this_month,
+      revenue_trend
     });
   } catch (err) {
     console.error('Membership stats error:', err.message);
