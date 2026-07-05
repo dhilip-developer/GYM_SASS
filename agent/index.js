@@ -47,7 +47,7 @@ app.post('/api/whatsapp/start', async (req, res) => {
   const session = whatsappManager.getSession(reqGymId);
   try {
     if (session.getStatus().status !== 'connected') {
-      await session.start();
+      await session.startSession();
     }
     res.json({ message: 'Session started' });
   } catch (err) {
