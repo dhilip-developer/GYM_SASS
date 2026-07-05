@@ -118,6 +118,9 @@ if (isConfigured) {
         if (!parsed.branches) { parsed.branches = defaultCollections.branches; modified = true; }
         if (!parsed.trainers) { parsed.trainers = []; modified = true; }
         if (!parsed.attendance) { parsed.attendance = []; modified = true; }
+        if (!parsed.pending_messages) { parsed.pending_messages = []; modified = true; }
+        if (!parsed.message_logs) { parsed.message_logs = []; modified = true; }
+        if (!parsed.message_templates) { parsed.message_templates = defaultCollections.message_templates; modified = true; }
         
         if (modified) writeDb(parsed);
         return parsed;
